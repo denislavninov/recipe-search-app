@@ -2,11 +2,13 @@ import React from "react";
 
 export const RecipeList = ({ recipes }) => {
   return (
-    <div>
+    <div className="recipe-list">
       {recipes.length > 0 ? (
         <ul>
           {recipes.map((recipe) => (
-            <li key={recipe.idMeal}>{recipe.strMeal}</li>
+            <li className="recipe-item" key={recipe.idMeal}>
+              {recipe.strMeal}
+            </li>
           ))}
         </ul>
       ) : (
