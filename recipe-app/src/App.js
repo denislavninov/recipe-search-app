@@ -48,7 +48,7 @@ export const App = () => {
                 <li key={key}>{selectedRecipe[key]}</li>
               ))}
           </ul>
-          <button onClick={() => SetSelectedRecipe(null)}>
+          <button onClick={() => setSelectedRecipe(null)}>
             Back to Recipe List
           </button>
         </div>
