@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 export const App = () => {
   const [recipes, setRecipes] = useState([]);
-  const [selectedRecipe, SetSelectedRecipe] = useState(null); // to store selected recipe details
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     fetchRecipesByIngredient("chicken_breast").then((recipes) =>
