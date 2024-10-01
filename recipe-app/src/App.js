@@ -22,7 +22,7 @@ export const App = () => {
       .then((recipeDetails) => {
         console.log("Fetched recipe details:", recipeDetails);
         console.log("Recipe ID to fetch details:", idMeal);
-        SetSelectedRecipe(recipeDetails); // store recipe details in state
+        setSelectedRecipe(recipeDetails);
       })
       .catch((error) => console.error("Error fetching recipe details:", error));
   };
