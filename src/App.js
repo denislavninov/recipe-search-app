@@ -6,14 +6,20 @@ import {
 } from "./modules/recipes/recipeService";
 import "./App.css";
 import { useState, useEffect } from "react";
+import {
+  useRecipesDispatch,
+  RECIPE_ACTIONS,
+  useRecipes,
+} from "./modules/recipes/RecipesProvider";
 
 export const App = () => {
-  const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const recipes = useRecipes();
+  const dispatch = useRecipesDispatch();
 
   useEffect(() => {
     fetchRecipesByIngredient("chicken_breast").then((recipes) =>
-      setRecipes(recipes.length > 0 ? recipes : []),
+      dispatch({ type: RECIPE_ACTIONS.update, payload: recipes }),
     );
   }, []);
 
