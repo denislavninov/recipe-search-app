@@ -90,3 +90,34 @@ border-radius: 8px;
 transition: background-color 0.3 ease;
 cursor: pointer;
 }
+
+
+.navbar {
+ margin: 25px;
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.navbar li {
+  
+}
+
+.navbar a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #575757;
+}
