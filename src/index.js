@@ -4,13 +4,16 @@ import "./index.css";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecipesProvider } from "./modules/recipes/RecipesProvider";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RecipesProvider>
-      <App />
-    </RecipesProvider>
+    <BrowserRouter>
+      <RecipesProvider>
+        <App />
+      </RecipesProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );
 
