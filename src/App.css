@@ -176,18 +176,24 @@ input:focus, textarea:focus {
   flex-wrap: wrap; 
   list-style-type: none; 
   padding: 0; 
-  
+  justify-content: center; /* Center the categories */
 }
 
-.category-item, h2 {
+h2 {
+  text-align: center;
+}
+
+.category-item {
   margin: 10px; 
   text-align: center; 
+  width: 150px; /* Set a fixed width for category items */
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.category-item img {
+  max-width: 100%; /* Ensure images fit within the category item */
+  height: auto; /* Maintain aspect ratio */
   border-radius: 5px;
+  max-height: 100px; /* Set a maximum height for images */
 }
 
 .category-item h3 {

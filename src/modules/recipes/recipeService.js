@@ -22,7 +22,7 @@ export async function fetchCategories() {
   return data.categories || [];
 }
 
-export async function fetchRecipesByCategory() {
-  const data = await fetchData(`${BD_BASE_URL}/categories.php`);
-  return data.categories || [];
+export async function fetchRecipesByCategory(category) {
+  const data = await fetchData(`${BD_BASE_URL}/filter.php?c=`, category); // Fetch recipes by category
+  return data.meals || []; // Return an empty array if data.meals is null or undefined
 }
