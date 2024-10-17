@@ -6,6 +6,8 @@ import ProtectedRoute from "./modules/recipes/ProtectedRoute";
 import { CreateNewRecipe } from "./modules/recipes/CreateRecipe";
 import { useState } from "react";
 import { Navbar } from "./modules/NavBar/NavbarComponent";
+import { Categories } from "./modules/categories/Categories";
+import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
 
 export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -14,7 +16,7 @@ export const AppRouter = () => {
       <Navbar />
       <Routes>
         <Route path="/user" element={<h1>User Page</h1>} />
-        <Route path="/settings" element={<h1>Setting Page</h1>} />
+        <Route path="/categories" element={<Categories />} />
         <Route
           path="/"
           element={
@@ -34,6 +36,7 @@ export const AppRouter = () => {
           }
         />
         <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/recipes/:category" element={<RecipeListByCategory />} />
       </Routes>
     </>
   );

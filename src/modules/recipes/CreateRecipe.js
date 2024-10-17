@@ -14,10 +14,10 @@ export const CreateNewRecipe = () => {
   };
 
   return (
-    <div>
+    <div className="create-recipe-container">
       <h2>Create New Recipe</h2>
-      <form>
-        <div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
           <label htmlFor="recipeName"> Recipe Name</label>
           <input
             id="recipeName"
@@ -27,18 +27,20 @@ export const CreateNewRecipe = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="ingredints">Ingredients</label>
           <textarea
             id="ingredients"
             aria-label="Recipe name"
-            value={recipeName}
+            value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             placeholder="List ingredients..."
             required
           />
         </div>
-        <button type="submit">Create Recipe</button>
+        <button type="submit" className="submit-button">
+          Create Recipe
+        </button>
       </form>
     </div>
   );

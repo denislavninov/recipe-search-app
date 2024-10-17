@@ -91,6 +91,7 @@ transition: background-color 0.3 ease;
 cursor: pointer;
 }
 
+/*  navbar styling */
 
 .navbar {
  margin: 25px;
@@ -101,9 +102,9 @@ cursor: pointer;
 .navbar ul {
   display: flex;
   justify-content: space-evenly;
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
 }
 
 .navbar li {
@@ -120,4 +121,83 @@ cursor: pointer;
 
 .navbar a:hover {
   background-color: #575757;
+}
+
+/* create recipe styling */
+
+.create-recipe-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input:focus, textarea:focus {
+  border-color: #FF6347;
+  outline: none;
+}
+
+.submit-button {
+  background-color: #FF6347;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #e5533d;
+}
+
+.categories-list {
+  display: flex; 
+  flex-wrap: wrap; 
+  list-style-type: none; 
+  padding: 0; 
+  
+}
+
+.category-item, h2 {
+  margin: 10px; 
+  text-align: center; 
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.category-item h3 {
+  color: #333; 
+}
+
+.category-item a {
+  text-decoration: none; 
+}
+
+.category-item a:focus {
+  outline: none; 
 }

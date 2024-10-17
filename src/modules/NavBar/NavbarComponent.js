@@ -8,12 +8,15 @@ export const Navbar = () => {
         <li>
           <NavLink to="/">Recipe Search</NavLink>
         </li>
+        <li>
+          <NavLink to="/categories">Categories</NavLink>
+        </li>
 
         <li>
           <NavLink to="/create-new-recipe">Create New Recipe </NavLink>
         </li>
         <li>
-          <NavLink to="/rcipe-details">User</NavLink>
+          <NavLink to="/user">User</NavLink>
         </li>
         <li>
           <NavLink to="/about">About</NavLink>
