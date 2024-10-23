@@ -5,7 +5,6 @@ import { RecipeDetails } from "./modules/recipes/RecipeList/index";
 import ProtectedRoute from "./modules/recipes/ProtectedRoute";
 import { CreateNewRecipe } from "./modules/recipes/CreateRecipe";
 import { useState } from "react";
-import { Navbar } from "./modules/NavBar/NavbarComponent";
 import { Categories } from "./modules/categories/Categories";
 import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
 import { UserProvider } from "./modules/user/UserContext";
@@ -15,7 +14,6 @@ export const AppRouter = () => {
   return (
     <>
       <UserProvider>
-        <Navbar />
         <Routes>
           <Route path="/login" element={<h1>Login Page Placeholder</h1>} />
 
