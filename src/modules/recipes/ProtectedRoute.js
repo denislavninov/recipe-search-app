@@ -5,7 +5,7 @@ import { useUser } from "../user/UserContext";
 const ProtectedRoute = ({ children }) => {
   const { user } = useUser();
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
   return children;
 };

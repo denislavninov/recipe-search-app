@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useUser } from "../user/UserContext";
+import ProtectedRoute from "../recipes/ProtectedRoute";
 
 export const Navbar = () => {
   const { user, setUser } = useUser();
@@ -21,7 +22,9 @@ export const Navbar = () => {
         {user ? (
           <>
             <li>
-              <NavLink to="/create-new-recipe">Create New Recipe</NavLink>
+              <ProtectedRoute>
+                <NavLink to="/create-new-recipe">Create New Recipe</NavLink>
+              </ProtectedRoute>
             </li>
             <li>
               <button onClick={handleLogout}>Logout</button>

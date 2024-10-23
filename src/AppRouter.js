@@ -17,6 +17,8 @@ export const AppRouter = () => {
       <UserProvider>
         <Navbar />
         <Routes>
+          <Route path="/login" element={<h1>Login Page Placeholder</h1>} />
+
           <Route path="/categories" element={<Categories />} />
           <Route
             path="/"
@@ -37,6 +39,7 @@ export const AppRouter = () => {
             }
           />
           <Route path="/recipes/:category" element={<RecipeListByCategory />} />
+          <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </UserProvider>
     </>
