@@ -16,6 +16,16 @@ export const AppRouter = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
 
+      {/* <Route path='/recipes' element={<ProtectedRoute/>}>
+                <Route path="new" element={<CreateNewRecipe />} />
+        <Route path=":recipeId" element={<RecipeDetails />} />
+        <Route path="categories" element={<Categories />}>
+          <Route path=":categoryId" element={<RecipeListByCategory />} />
+        </Route>
+
+
+      </Route> */}
+
       <Route
         path="/create-new-recipe"
         element={
