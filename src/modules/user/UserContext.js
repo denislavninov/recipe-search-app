@@ -3,18 +3,10 @@ import React, { createContext, useContext, useState } from "react";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Manage user state
-
-  const login = (userData) => {
-    setUser(userData); // Set user data on login
-  };
-
-  const logout = () => {
-    setUser(null); // Clear user data on logout
-  };
+  const [user, setUser] = useState(null);
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

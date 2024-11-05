@@ -27,7 +27,9 @@ export const Navbar = () => {
               </ProtectedRoute>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <NavLink to="/" onClick={handleLogout}>
+                Logout
+              </NavLink>
             </li>
           </>
         ) : (

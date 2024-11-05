@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchRecipesByCategory } from "../recipes/recipeService"; // Create this function to fetch recipes by category
 
 export const RecipeListByCategory = () => {
@@ -27,11 +27,14 @@ export const RecipeListByCategory = () => {
   if (error) return <h2>Error: {error}</h2>;
 
   return (
-    <div>
-      <h2>Recipes in {category}</h2>
+    <div className="recipe-list">
       <ul>
+        <h2>Recipes in {category}</h2>
         {recipes.map((recipe) => (
-          <li key={recipe.idMeal}>{recipe.strMeal}</li> // Display recipe names
+          <li key={recipe.idMeal} className="recipe-item">
+            {/* {recipe.strMeal} */}
+            <Link to={`/recipe/${recipe.strMeal}`}>{recipe.strMeal}</Link>
+          </li> // Display recipe names
         ))}
       </ul>
     </div>

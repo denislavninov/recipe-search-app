@@ -21,6 +21,7 @@ export const CreateNewRecipe = () => {
           <label htmlFor="recipeName"> Recipe Name</label>
           <input
             id="recipeName"
+            className="create-input"
             aria-label="Create recipe search"
             placeholder="Create for recipes..."
             onChange={(e) => setRecipeName(e.target.value)}
@@ -31,6 +32,7 @@ export const CreateNewRecipe = () => {
           <label htmlFor="ingredints">Ingredients</label>
           <textarea
             id="ingredients"
+            className="styled-textarea"
             aria-label="Recipe name"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}

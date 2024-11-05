@@ -7,39 +7,39 @@ import { CreateNewRecipe } from "./modules/recipes/CreateRecipe";
 import { useState } from "react";
 import { Categories } from "./modules/categories/Categories";
 import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
-import { UserProvider } from "./modules/user/UserContext";
+import { Login } from "./modules/user/Login";
 
 export const AppRouter = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  return (
-    <>
-      <UserProvider>
-        <Routes>
-          <Route path="/login" element={<h1>Login Page Placeholder</h1>} />
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-          <Route path="/categories" element={<Categories />} />
-          <Route
-            path="/"
-            element={
-              <>
-                <SearchBar />
-                <RecipeDetails />
-                <RecipeList />
-              </>
-            }
-          />
-          <Route
-            path="/create-new-recipe"
-            element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <CreateNewRecipe />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/recipes/:category" element={<RecipeListByCategory />} />
-          <Route path="*" element={<h1>Page not found</h1>} />
-        </Routes>
-      </UserProvider>
-    </>
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+
+      <Route
+        path="/create-new-recipe"
+        element={
+          <ProtectedRoute>
+            <CreateNewRecipe />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="/categories" element={<Categories />} />
+      <Route path="/recipes/:category" element={<RecipeListByCategory />} />
+
+      <Route
+        path="/"
+        element={
+          <>
+            <SearchBar />
+            <RecipeDetails />
+            <RecipeList />
+          </>
+        }
+      />
+
+      <Route path="*" element={<h1>Page not found</h1>} />
+    </Routes>
   );
 };

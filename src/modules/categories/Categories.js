@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   fetchCategories,
   fetchRecipesByCategory,
@@ -13,6 +14,7 @@ export const Categories = () => {
   const [recipes, setRecipes] = useState([]); // State to hold recipes for the selected category
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipeLoading, setRecipeLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -29,17 +31,8 @@ export const Categories = () => {
     getCategories();
   }, []);
 
-  const handleCategorySelect = async (categoryName) => {
-    setRecipeLoading(true);
-    try {
-      const fetchedRecipes = await fetchRecipesByCategory(categoryName);
-      setRecipes(fetchedRecipes);
-      setSelectedRecipe(null);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setRecipeLoading(false);
-    }
+  const handleCategorySelect = (categoryName) => {
+    navigate(`/recipes/${categoryName}`);
   };
 
   const handleRecipeSelect = (recipe) => {

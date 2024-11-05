@@ -57,6 +57,10 @@
   margin-bottom: 10px;
 }
 
+.recipe-item a {
+  color: #333;
+  text-decoration: none;
+}
 
 .recipe-details {
   text-align: center;
@@ -135,7 +139,19 @@ label {
   font-weight: bold;
 }
 
-input, textarea {
+/* input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+} */
+
+/* input:focus, textarea:focus {
+  border-color: #FF6347;
+  outline: none;
+} */
+.create-input, .create-textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -143,10 +159,12 @@ input, textarea {
   font-size: 16px;
 }
 
-input:focus, textarea:focus {
+.create-input:focus, .create-textarea:focus { 
   border-color: #FF6347;
   outline: none;
 }
+
+
 
 .submit-button {
   background-color: #FF6347;
@@ -197,4 +215,49 @@ h2 {
 
 .category-item a:focus {
   outline: none; 
+}
+
+/* login */
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container h1 {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.login-input {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-log {
+  padding: 10px 20px;
+  background-color: #FF6347;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3 ease;
+  width: 100%;
+}
+
+.button-log:hover {
+  background-color: #FF4500;
+
 }
