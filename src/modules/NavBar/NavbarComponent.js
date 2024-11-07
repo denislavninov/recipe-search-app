@@ -17,14 +17,12 @@ export const Navbar = () => {
           <NavLink to="/">Recipe Search</NavLink>
         </li>
         <li>
-          <NavLink to="/categories">Categories</NavLink>
+          <NavLink to="recipes/categories">Categories</NavLink>
         </li>
         {user ? (
           <>
             <li>
-              <ProtectedRoute>
-                <NavLink to="/create-new-recipe">Create New Recipe</NavLink>
-              </ProtectedRoute>
+              <NavLink to="recipes/new">Create New Recipe</NavLink>
             </li>
             <li>
               <NavLink to="/" onClick={handleLogout}>

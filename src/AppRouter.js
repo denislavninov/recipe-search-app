@@ -8,35 +8,19 @@ import { useState } from "react";
 import { Categories } from "./modules/categories/Categories";
 import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
 import { Login } from "./modules/user/Login";
-
 export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-
-      {/* <Route path='/recipes' element={<ProtectedRoute/>}>
-                <Route path="new" element={<CreateNewRecipe />} />
+      <Route path="login" element={<Login />} />
+      <Route path="/recipes">
+        <Route path="new" element={<CreateNewRecipe />} />
         <Route path=":recipeId" element={<RecipeDetails />} />
-        <Route path="categories" element={<Categories />}>
+        <Route path="categories">
           <Route path=":categoryId" element={<RecipeListByCategory />} />
+          <Route index element={<Categories />} />
         </Route>
-
-
-      </Route> */}
-
-      <Route
-        path="/create-new-recipe"
-        element={
-          <ProtectedRoute>
-            <CreateNewRecipe />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route path="/categories" element={<Categories />} />
-      <Route path="/recipes/:category" element={<RecipeListByCategory />} />
+      </Route>
 
       <Route
         path="/"
@@ -48,7 +32,6 @@ export const AppRouter = () => {
           </>
         }
       />
-
       <Route path="*" element={<h1>Page not found</h1>} />
     </Routes>
   );
