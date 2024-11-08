@@ -12,9 +12,17 @@ export async function fetchRecipesById(idMeal) {
   return data.meals[0];
 }
 
-// www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
-
 export async function searchRecipesByName(query) {
   const data = await fetchData(`${BD_BASE_URL}/search.php?s=`, query);
   return data.meals;
+}
+
+export async function fetchCategories() {
+  const data = await fetchData(`${BD_BASE_URL}/categories.php`);
+  return data.categories || [];
+}
+
+export async function fetchRecipesByCategory(category) {
+  const data = await fetchData(`${BD_BASE_URL}/filter.php?c=`, category); // Fetch recipes by category
+  return data.meals || []; // Return an empty array if data.meals is null or undefined
 }
