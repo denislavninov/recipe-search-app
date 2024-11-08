@@ -22,23 +22,35 @@ export const Login = () => {
     <div className="login-container">
       <h1>Login</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
-        className="login-input"
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        className="login-input"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="button-log" onClick={handleLogin}>
-        Log in
-      </button>{" "}
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}
+      >
+        <label htmlFor="email-input">Email</label>
+        <input
+          id="email-input"
+          className="login-input"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label htmlFor="password-input">Password</label>
+        <input
+          id="password-input"
+          className="login-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className="button-log" onClick={handleLogin}>
+          Log in
+        </button>
+      </form>
     </div>
   );
 };
