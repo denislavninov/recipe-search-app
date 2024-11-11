@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -47,8 +47,16 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="button-log" onClick={handleLogin}>
+
+        <button type="submit" className="button-log">
           Log in
+        </button>
+        <button
+          type="button"
+          className="button-register"
+          onClick={() => navigate("/register")}
+        >
+          Register
         </button>
       </form>
     </div>

@@ -8,11 +8,13 @@ import { useState } from "react";
 import { Categories } from "./modules/categories/Categories";
 import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
 import { Login } from "./modules/user/Login";
+import { Register } from "./modules/user/Register";
 export const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <Routes>
       <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
       <Route path="/recipes">
         <Route path="new" element={<CreateNewRecipe />} />
         <Route path=":recipeId" element={<RecipeDetails />} />

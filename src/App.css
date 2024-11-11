@@ -217,27 +217,27 @@ h2 {
   outline: none; 
 }
 
-/* login */
+/* login , register pages */
 
-.login-container {
+.login-container, .register-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px #0000001a;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.login-container h1 {
+.login-container h1, .register-container h1 {
 text-align: center;
 margin-bottom: 20px;
 }
 
-.login-input {
+.login-input, .register-input {
   margin-bottom: 15px;
   width: 100%;
   padding: 10px;
@@ -245,7 +245,8 @@ margin-bottom: 20px;
   border-radius: 4px;
 }
 
-.button-log {
+.button-log, .button-register {
+  margin-bottom: 10px;
   padding: 10px 20px;
   background-color: #FF6347;
   color: white;
@@ -257,7 +258,6 @@ margin-bottom: 20px;
   width: 100%;
 }
 
-.button-log:hover {
+.button-log:hover, .button-register:hover {
   background-color: #FF4500;
-
 }
