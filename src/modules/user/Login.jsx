@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useUser } from "./UserContext";
 import { useNavigate } from "react-router-dom";
+import { Container } from "./Container";
+import { Button } from "./shared-button";
+import { Input } from "./Shared-input";
 
 export const Login = () => {
   const { setUser } = useUser();
@@ -19,8 +22,8 @@ export const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
+    <Container>
+      <h1 className="shared-h1">Login</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form
@@ -30,35 +33,25 @@ export const Login = () => {
         }}
       >
         <label htmlFor="email-input">Email</label>
-        <input
+        <Input
           id="email-input"
-          className="login-input"
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <label htmlFor="password-input">Password</label>
-        <input
+        <Input
           id="password-input"
-          className="login-input"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit" className="button-log">
-          Log in
-        </button>
-        <button
-          type="button"
-          className="button-register"
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </button>
+        <Button type="submit">Log in</Button>
+        <Button onClick={() => navigate("/register")}>Register</Button>
       </form>
-    </div>
+    </Container>
   );
 };

@@ -219,7 +219,7 @@ h2 {
 
 /* login , register pages */
 
-.login-container, .register-container {
+.shared-container {
   max-width: 400px;
   margin: 50px auto;
   padding: 20px;
@@ -232,20 +232,21 @@ h2 {
   align-items: center;
 }
 
-.login-container h1, .register-container h1 {
-text-align: center;
-margin-bottom: 20px;
-}
-
-.login-input, .register-input {
-  margin-bottom: 15px;
+.shared-input {
   width: 100%;
   padding: 10px;
+  margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.button-log, .button-register {
+.shared-h1 {
+  text-align: center;
+margin-bottom: 20px;
+}
+
+
+.shared-button {
   margin-bottom: 10px;
   padding: 10px 20px;
   background-color: #FF6347;
@@ -258,6 +259,6 @@ margin-bottom: 20px;
   width: 100%;
 }
 
-.button-log:hover, .button-register:hover {
+.shared-button:hover {
   background-color: #FF4500;
 }

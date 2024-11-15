@@ -1,51 +1,63 @@
+import { useState } from "react"; // Removed useContext
+import { Container } from "./Container";
+import { Input } from "./Shared-input";
+import { useUser } from "./UserContext"; // Import useUser hook
+
 export const Register = () => {
+  const { dispatch } = useUser(); // Use the useUser hook to get dispatch
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  }); // State for form data
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value })); // Update state on input change
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    localStorage.setItem("user", JSON.stringify({ name, email }));
-
-    console.log("Kullanıcı Bilgileri:", { name, email, password });
-
-    loginUser(email, password);
+    dispatch({ type: "REGISTER_USER", payload: formData }); // Dispatch action with form data
+    console.log("Kullanıcı Bilgileri:", formData); // Log form data
   };
+
   return (
-    <div className="register-container">
-      <h1>Register</h1>
+    <Container>
+      <h1 className="shared-h1">Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name-input">Name</label>
-        <input
-          id="name-input"
-          name="name"
-          className="register-input"
+        <Input
           type="text"
-          placeholder="Name"
+          name="name"
+          placeholder="Username"
+          id="name-input"
+          value={formData.name} // Bind input value to state
+          onChange={handleChange} // Handle input change
         />
         <label htmlFor="email-input">Email</label>
-        <input
-          id="email-input"
+        <Input
+          type="email"
           name="email"
-          className="register-input"
-          type="text"
-          placeholder="email@gmail.com"
+          placeholder="demail@gmail.com"
+          id="email-input"
+          value={formData.email} // Bind input value to state
+          onChange={handleChange} // Handle input change
         />
-        <label>Password</label>
-        <input
-          id="password-input"
-          name="password"
-          className="register-input"
+        <label htmlFor="password-input">Password</label>
+        <Input
           type="password"
+          name="password"
           placeholder="Password"
+          id="password-input"
+          value={formData.password} // Bind input value to state
+          onChange={handleChange} // Handle input change
         />
-        <button className="button-register">Sign In</button>
-      </form>
-    </div>
-  );
-};
 
-const loginUser = (email, password) => {
-  console.log("giris yapiliyor", { email, password });
+        <button type="submit" className="shared-button">
+          Register
+        </button>
+      </form>
+    </Container>
+  );
 };
