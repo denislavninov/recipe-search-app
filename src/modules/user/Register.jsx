@@ -1,10 +1,13 @@
 import { useState } from "react"; // Removed useContext
-import { Container } from "./Container";
-import { Input } from "./Shared-input";
-import { useUser } from "./UserContext"; // Import useUser hook
+import { Container } from "../../shared-component/Container/index";
+import { Input } from "../../shared-component/Input/index";
+import { useUserDispatch } from "./UserContext";
+import { useNavigate } from "react-router-dom";
+import { Button } from "../../shared-component/Button/index";
 
 export const Register = () => {
-  const { dispatch } = useUser(); // Use the useUser hook to get dispatch
+  const dispatch = useUserDispatch(); // Use the useUser hook to get dispatch
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -54,9 +57,13 @@ export const Register = () => {
           onChange={handleChange} // Handle input change
         />
 
-        <button type="submit" className="shared-button">
+        <Button
+          type="submit"
+          className="shared-button"
+          onClick={() => navigate("/recipes/new")}
+        >
           Register
-        </button>
+        </Button>
       </form>
     </Container>
   );

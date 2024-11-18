@@ -219,46 +219,6 @@ h2 {
 
 /* login , register pages */
 
-.shared-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px #0000001a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.shared-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.shared-h1 {
-  text-align: center;
-margin-bottom: 20px;
-}
 
 
-.shared-button {
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  background-color: #FF6347;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3 ease;
-  width: 100%;
-}
 
-.shared-button:hover {
-  background-color: #FF4500;
-}

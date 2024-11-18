@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 
 const UserContext = createContext();
+const UserDispatchContext = createContext();
 
 const initialState = {
   user: null,
@@ -27,12 +28,15 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
 
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
-      {children}
+    <UserContext.Provider value={state}>
+      <UserDispatchContext.Provider value={dispatch}>
+        {children}
+      </UserDispatchContext.Provider>
     </UserContext.Provider>
   );
 };
-
 export const useUser = () => {
   return useContext(UserContext);
 };
+
+export const useUserDispatch = () => useContext(UserDispatchContext);

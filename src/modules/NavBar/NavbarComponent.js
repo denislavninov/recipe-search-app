@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useUser } from "../user/UserContext";
-import ProtectedRoute from "../recipes/ProtectedRoute";
 
 export const Navbar = () => {
   const { user, setUser } = useUser();

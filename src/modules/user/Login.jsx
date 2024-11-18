@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useUser } from "./UserContext";
+import { useUser, useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import { Container } from "./Container";
-import { Button } from "./shared-button";
-import { Input } from "./Shared-input";
+import { Container } from "../../shared-component/Container/index";
+import { Button } from "../../shared-component/Button/index";
+import { Input } from "../../shared-component/Input/index";
 
 export const Login = () => {
-  const { setUser } = useUser();
+  const dispatch = useUserDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,11 +14,12 @@ export const Login = () => {
 
   const handleLogin = () => {
     if (username && password) {
-      setUser({ name: username });
+      dispatch({ type: "LOGIN", payload: { username, password } });
       navigate("/");
     } else {
       setError("Kullanıcı adı ve şifre gereklidir.");
     }
+    console.log("User logged in:", { username, password });
   };
 
   return (

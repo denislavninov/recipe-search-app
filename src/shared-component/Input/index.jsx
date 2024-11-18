@@ -1,5 +1,5 @@
 import React from "react";
-import "../../App.css"; // Ensure to import the CSS file
+import "./styles.css";
 
 export const Input = ({ type, placeholder, name, id, value, onChange }) => {
   return (

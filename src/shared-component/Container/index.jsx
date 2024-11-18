@@ -1,5 +1,5 @@
 import React from "react";
-import "../../App.css";
+import "./styles.css";
 
 export const Container = ({ children }) => {
   return <div className="shared-container">{children}</div>;
