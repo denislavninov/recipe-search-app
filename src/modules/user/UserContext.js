@@ -5,24 +5,22 @@ const UserDispatchContext = createContext();
 
 const initialState = {
   user: null,
+  users: [],
 };
 
 const userReducer = (state, action) => {
-  switch (action.type) {
-    case "REGISTER_USER":
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          name: action.payload.name,
-          email: action.payload.email,
-        }),
-      );
-      return { ...state, user: action.payload };
-    // Add other cases as needed
-    default:
-      return state;
+  if (action.type === "REGISTER_USER") {
+    const newUser = {
+      name: action.payload.name,
+      email: action.payload.email,
+    };
+    localStorage.setItem("user", JSON.stringify(newUser));
+    return { ...state, user: newUser, users: [...state.users, newUser] };
   }
+  return state;
 };
+
+export default UserContext;
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);

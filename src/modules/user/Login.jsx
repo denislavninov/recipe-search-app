@@ -5,6 +5,11 @@ import { Container } from "../../shared-component/Container/index";
 import { Button } from "../../shared-component/Button/index";
 import { Input } from "../../shared-component/Input/index";
 
+const validateEmail = (email) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
+
 export const Login = () => {
   const dispatch = useUserDispatch();
   const [username, setUsername] = useState("");
@@ -13,13 +18,23 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username && password) {
-      dispatch({ type: "LOGIN", payload: { username, password } });
-      navigate("/");
-    } else {
-      setError("Kullanıcı adı ve şifre gereklidir.");
+    if (!username || !password) {
+      setError("Usarname and password required.");
+      return;
     }
+    if (!validateEmail(username)) {
+      setError("invalid email format");
+      return;
+    }
+    if (password.length < 4) {
+      setError("Password must be at least 4 characters.");
+      return;
+    }
+
+    dispatch({ type: "LOGIN", payload: { username, password } });
     console.log("User logged in:", { username, password });
+
+    navigate("/");
   };
 
   return (
