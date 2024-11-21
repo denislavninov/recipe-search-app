@@ -30,7 +30,7 @@ export const Register = () => {
     event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      setError("All fields Required.");
+      setError("All fields are required.");
       return;
     }
 
