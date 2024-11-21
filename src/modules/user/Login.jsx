@@ -23,7 +23,7 @@ export const Login = () => {
       return;
     }
     if (!validateEmail(username)) {
-      setError("invalid email format");
+      setError("Invalid email format");
       return;
     }
     if (password.length < 4) {
