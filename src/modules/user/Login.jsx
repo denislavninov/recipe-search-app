@@ -19,7 +19,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     if (!username || !password) {
-      setError("Usarname and password required.");
+      setError("Username and password are required.");
       return;
     }
     if (!validateEmail(username)) {
