@@ -1,44 +1,73 @@
-import React, { useState } from "react";
-import { useUser } from "./UserContext";
+import React, { useEffect, useState } from "react";
+import { useUser, useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
+import { Container } from "../../shared-component/Container/index";
+import { Button } from "../../shared-component/Button/index";
+import { Input } from "../../shared-component/Input/index";
+
+const validateEmail = (email) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
 
 export const Login = () => {
-  const { setUser } = useUser();
+  const dispatch = useUserDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    if (username && password) {
-      setUser({ name: username });
-      navigate("/");
-    } else {
-      setError("Kullanıcı adı ve şifre gereklidir.");
+    if (!username || !password) {
+      setError("Username and password are required.");
+      return;
     }
+    if (!validateEmail(username)) {
+      setError("Invalid email format");
+      return;
+    }
+    if (password.length < 4) {
+      setError("Password must be at least 4 characters.");
+      return;
+    }
+
+    dispatch({ type: "LOGIN", payload: { username, password } });
+    console.log("User logged in:", { username, password });
+
+    navigate("/");
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
+    <Container>
+      <h1 className="shared-h1">Login</h1>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <input
-        className="login-input"
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        className="login-input"
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="button-log" onClick={handleLogin}>
-        Log in
-      </button>{" "}
-    </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleLogin();
+        }}
+      >
+        <label htmlFor="email-input">Email</label>
+        <Input
+          id="email-input"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label htmlFor="password-input">Password</label>
+        <Input
+          id="password-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <Button type="submit">Log in</Button>
+        <Button onClick={() => navigate("/register")}>Register</Button>
+      </form>
+    </Container>
   );
 };

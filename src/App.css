@@ -217,47 +217,8 @@ h2 {
   outline: none; 
 }
 
-/* login */
+/* login , register pages */
 
-.login-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.login-container h1 {
-text-align: center;
-margin-bottom: 20px;
-}
 
-.login-input {
-  margin-bottom: 15px;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
 
-.button-log {
-  padding: 10px 20px;
-  background-color: #FF6347;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3 ease;
-  width: 100%;
-}
-
-.button-log:hover {
-  background-color: #FF4500;
-
-}
