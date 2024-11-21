@@ -4,11 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container } from "../../shared-component/Container/index";
 import { Button } from "../../shared-component/Button/index";
 import { Input } from "../../shared-component/Input/index";
-
-const validateEmail = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-};
+import { validateEmail } from "../../utils";
 
 export const Login = () => {
   const dispatch = useUserDispatch();

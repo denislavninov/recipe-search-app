@@ -4,11 +4,7 @@ import { Input } from "../../shared-component/Input/index";
 import { useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../shared-component/Button/index";
-
-const validateEmail = (email) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-};
+import { validateEmail } from "../../utils";
 
 export const Register = () => {
   const dispatch = useUserDispatch(); // Use the useUser hook to get dispatch

@@ -8,3 +8,8 @@ export async function fetchData(url, query = "") {
   }
   return await response.json();
 }
+
+export const validateEmail = (email) => {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+};
