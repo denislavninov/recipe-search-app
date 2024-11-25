@@ -3,7 +3,7 @@ import { RecipeList } from "./modules/recipes/RecipeList";
 import { SearchBar } from "./modules/recipes/search-bar";
 import { RecipeDetails } from "./modules/recipes/RecipeList/index";
 import ProtectedRoute from "./modules/recipes/ProtectedRoute";
-import { CreateNewRecipe } from "./modules/recipes/CreateRecipe";
+import { CreateNewRecipe } from "./modules/recipes/NewRecipeForm/CreateRecipe";
 import { useState } from "react";
 import { Categories } from "./modules/categories/Categories";
 import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
