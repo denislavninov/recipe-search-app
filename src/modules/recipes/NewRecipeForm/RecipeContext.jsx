@@ -11,3 +11,8 @@ export const RecipeProvider = ({ children }) => {
     </RecipeContext.Provider>
   );
 };
+<<<<<<< HEAD
+=======
+
+export default RecipeProvider;
+>>>>>>> 3c54945 (added lesson40 some styles and changes)

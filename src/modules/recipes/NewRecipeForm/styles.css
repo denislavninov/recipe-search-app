@@ -3,4 +3,51 @@
   flex-direction: column;
   gap:15px
 
+<<<<<<< HEAD
+=======
+}
+
+/* styles.css */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Geçiş efekti */
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #FF6347; /* Odaklandığında kenar rengi */
+  box-shadow: 0 0 5px rgba(255, 99, 71, 0.5); /* Hafif gölge */
+}
+
+h2 {
+  font-size: 2rem; /* Daha büyük başlık boyutu */
+  color: #FF6347; /* Başlık rengi */
+  text-align: center;
+  margin-bottom: 20px; /* Alt boşluk */
+}
+/* styles.css */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.submit-button {
+  background-color: #FF6347;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s; /* Geçiş efekti */
+}
+
+.submit-button:hover {
+  background-color: #e5533d;
+  transform: scale(1.05); /* Hover durumunda büyütme */
+>>>>>>> 3c54945 (added lesson40 some styles and changes)
 }
