@@ -14,11 +14,7 @@ export const CreateNewRecipe = () => {
     formState: { errors },
   } = useForm({
     strMeal: "",
-<<<<<<< HEAD
-    strCategory: "Beef",
-=======
     strCategory: "",
->>>>>>> 3c54945 (added lesson40 some styles and changes)
   });
 
   const onSubmit = (data) => {
@@ -43,10 +39,7 @@ export const CreateNewRecipe = () => {
         <label htmlFor="strMeal">Meal name</label>
         <input
           id="strMeal"
-<<<<<<< HEAD
-=======
           placeholder="Enter the meal name"
->>>>>>> 3c54945 (added lesson40 some styles and changes)
           {...register("strMeal", {
             minLength: {
               value: 3,
@@ -55,19 +48,12 @@ export const CreateNewRecipe = () => {
             required: { value: true, message: "Meal name is required." },
           })}
         />
-<<<<<<< HEAD
-        {errors.strMeal && <p>{errors.strMeal.message}</p>}
-
-        <label htmlFor="strCategory">Select Category</label>
-        <select id="strCategory" {...register("strCategory")}>
-=======
         {errors.strMeal && (
           <p className="error-message">{errors.strMeal.message}</p>
         )}
 
         <select id="strCategory" {...register("strCategory")}>
           <option value="">Select a category</option>
->>>>>>> 3c54945 (added lesson40 some styles and changes)
           {categories.map((category) => (
             <option key={category} value={category}>
               {category}
@@ -75,37 +61,22 @@ export const CreateNewRecipe = () => {
           ))}
         </select>
 
-<<<<<<< HEAD
-        <label htmlFor="strDrinkAlternate">Drink Alternate</label>
-        <input id="strDrinkAlternate" {...register("strDrinkAlternate")} />
-
-        <label htmlFor="strArea">Select Area</label>
-        <select id="strArea" {...register("strArea", { required: true })}>
-=======
         <select id="strArea" {...register("strArea", { required: true })}>
           <option>Select an area</option>
->>>>>>> 3c54945 (added lesson40 some styles and changes)
           {areas.map((area) => (
             <option key={area} value={area}>
               {area}
             </option>
           ))}
         </select>
-<<<<<<< HEAD
-        {errors.strArea && <p>{errors.strArea.message}</p>}
-=======
         {errors.strArea && (
           <p className="error-message">{errors.strArea.message}</p>
         )}
->>>>>>> 3c54945 (added lesson40 some styles and changes)
 
         <label htmlFor="strInstructions"> Instructions</label>
         <textarea
           id="strInstructions"
-<<<<<<< HEAD
-=======
           placeholder="Enter the cooking instructions here..."
->>>>>>> 3c54945 (added lesson40 some styles and changes)
           {...register("strInstructions", {
             minLength: {
               value: 30,
@@ -118,9 +89,6 @@ export const CreateNewRecipe = () => {
             required: { value: true, message: "Instructions is required." },
           })}
         />
-<<<<<<< HEAD
-        {errors.strInstructions && <p>{errors.strInstructions.message}</p>}
-=======
         {errors.strInstructions && (
           <p className="error-message">{errors.strInstructions.message}</p>
         )}
@@ -130,41 +98,20 @@ export const CreateNewRecipe = () => {
           placeholder="Enter alternate drink name"
           {...register("strDrinkAlternate")}
         />
->>>>>>> 3c54945 (added lesson40 some styles and changes)
 
         <label htmlFor="strMealThumb">Meal thumbnail URL </label>
         <input
           id="strMealThumb"
-<<<<<<< HEAD
-          {...register("strMealThumb", {
-            pattern: {
-              value:
-                /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/,
-=======
           placeholder="https://www.example.com/image.jpg"
           {...register("strMealThumb", {
             pattern: {
               value:
                 /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/,
->>>>>>> 3c54945 (added lesson40 some styles and changes)
               message: "Please enter a valid URL",
             },
             required: { value: true, message: "URL is required" },
           })}
         />
-<<<<<<< HEAD
-        {errors.strMealThumb && <p>Meal thumbnail is required.</p>}
-
-        <label htmlFor="strTags">Tags</label>
-        <input id="strTags" {...register("strTags")} />
-
-        <label htmlFor="strYoutube">YouTube Link</label>
-        <input id="strYoutube" {...register("strYoutube")} />
-
-        <label htmlFor="strIngredient1">Ingredient 1</label>
-        <input id="strIngredient1" {...register("strIngredient1")} />
-
-=======
         {errors.strMealThumb && (
           <p className="error-message">{errors.strMealThumb.message}</p>
         )}
@@ -193,7 +140,6 @@ export const CreateNewRecipe = () => {
           placeholder="Enter the second ingredient" // Placeholder eklendi
           {...register("strIngredient1")}
         />
->>>>>>> 3c54945 (added lesson40 some styles and changes)
         <button type="submit" className="submit-button">
           Create Recipe
         </button>
