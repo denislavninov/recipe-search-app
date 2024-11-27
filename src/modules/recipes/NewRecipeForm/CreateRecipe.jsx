@@ -3,9 +3,11 @@ import { Container } from "../../../shared-component/Container";
 import "./styles.css";
 import { useContext } from "react";
 import { RecipeContext } from "./RecipeContext";
+import { useState } from "react";
 
 export const CreateNewRecipe = () => {
   const { recipes, setRecipes } = useContext(RecipeContext);
+  const [pairCount, setPairCount] = useState(1);
 
   const {
     register,
@@ -15,6 +17,7 @@ export const CreateNewRecipe = () => {
   } = useForm({
     strMeal: "",
     strCategory: "",
+    ingredients: [{ ingredient: "", measure: "" }],
   });
 
   const onSubmit = (data) => {
@@ -27,11 +30,23 @@ export const CreateNewRecipe = () => {
       strMealThumb: data.strMealThumb || "",
       strTags: data.strTags ? data.strTags.split(",") : [],
       ingredients: [data.strIngredients1 || ""],
+      ...data.ingredients
+        .filter((pair) => pair.ingredient.trim() !== "")
+        .reduce(
+          (acc, pair, index) => ({
+            ...acc,
+            [`strIngredient${index + 1}`]: pair.ingredient,
+            [`strMeasure${index + 1}`]: pair.measure,
+          }),
+          {},
+        ),
     };
     setRecipes([...recipes, formattedData]);
     console.log("New recipe added", formattedData);
   };
-
+  const addIngredientPair = () => {
+    setPairCount((prev) => prev + 1);
+  };
   return (
     <Container>
       <h2>Create New Recipe</h2>
@@ -128,18 +143,39 @@ export const CreateNewRecipe = () => {
           <p className="error-message">{errors.strYouTube.message}</p>
         )}
 
-        <label htmlFor="strIngredient1">Ingredient 1</label>
-        <input
-          id="strIngredient1"
-          placeholder="Enter the first ingredient"
-          {...register("strIngredient1")}
-        />
-        <label htmlFor="strIngredient1">Ingredient 2</label>
-        <input
-          id="strIngredient1"
-          placeholder="Enter the second ingredient" // Placeholder eklendi
-          {...register("strIngredient1")}
-        />
+        <div className="ingredients-section">
+          <h3>Ingredients and Measures</h3>
+          {[...Array(pairCount)].map((_, index) => (
+            <div key={index} className="ingredient-pair">
+              <div className="ingredient-inputs">
+                <input
+                  placeholder={`Ingredient ${index + 1}`}
+                  {...register(`ingredients.${index}.ingredient`)}
+                />
+                <input
+                  placeholder={`Measure ${index + 1}`}
+                  {...register(`ingredients.${index}.measure`)}
+                />
+                {index > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setPairCount((prev) => prev - 1)}
+                    className="remove-ingredient"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={addIngredientPair}
+            className="add-ingredient"
+          >
+            + Ingredient
+          </button>
+        </div>
         <button type="submit" className="submit-button">
           Create Recipe
         </button>
