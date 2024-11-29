@@ -1,21 +1,22 @@
-import { RecipeList } from "./modules/recipes/RecipeList";
+import React from "react";
+import { RecipesProvider } from "./modules/recipes/RecipesProvider";
+import CreateNewRecipe from "./modules/recipes/NewRecipeForm/CreateRecipe";
 import "./App.css";
 import { AppRouter } from "./AppRouter";
 import { Navbar } from "./modules/NavBar/NavbarComponent";
 import { UserProvider } from "./modules/user/UserContext";
-import { RecipeProvider } from "./modules/recipes/NewRecipeForm/RecipeContext";
 
 export const App = () => {
   return (
     <UserProvider>
-      <RecipeProvider>
+      <RecipesProvider initialState={[]}>
         <>
           <Navbar />
           <div className="container">
             <AppRouter />
           </div>
         </>
-      </RecipeProvider>
+      </RecipesProvider>
     </UserProvider>
   );
 };

@@ -2,12 +2,13 @@ import { useForm } from "react-hook-form";
 import { Container } from "../../../shared-component/Container";
 import "./styles.css";
 import { useContext } from "react";
-import { RecipeContext } from "./RecipeContext";
 import { useState } from "react";
+import { useRecipesDispatch } from "../RecipesProvider";
+import { RECIPE_ACTIONS } from "../RecipesProvider";
 
 export const CreateNewRecipe = () => {
-  const { recipes, setRecipes } = useContext(RecipeContext);
-  const [pairCount, setPairCount] = useState(1);
+  const dispatch = useRecipesDispatch();
+  const [pairCount, setPairCount] = useState(1); // Initialize pairCount state
 
   const {
     register,
@@ -41,9 +42,10 @@ export const CreateNewRecipe = () => {
           {},
         ),
     };
-    setRecipes([...recipes, formattedData]);
+    dispatch({ type: RECIPE_ACTIONS.update, payload: [formattedData] }); // Use dispatch to add the recipe
     console.log("New recipe added", formattedData);
   };
+
   const addIngredientPair = () => {
     setPairCount((prev) => prev + 1);
   };
