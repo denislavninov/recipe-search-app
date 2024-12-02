@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useUser, useUserDispatch } from "./UserContext";
+import React, { useState } from "react";
+import { useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../shared-component/Container/index";
 import { Button } from "../../shared-component/Button/index";

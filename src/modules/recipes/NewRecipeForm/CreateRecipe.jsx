@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Container } from "../../../shared-component/Container";
 import "./styles.css";
-import { useContext } from "react";
 import { useState } from "react";
 import { useRecipesDispatch } from "../RecipesProvider";
 import { RECIPE_ACTIONS } from "../RecipesProvider";
@@ -13,7 +12,7 @@ export const CreateNewRecipe = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm({
     strMeal: "",
@@ -23,6 +22,7 @@ export const CreateNewRecipe = () => {
 
   const onSubmit = (data) => {
     const formattedData = {
+      id: Date.now(),
       strMeal: data.strMeal,
       strCategory: data.strCategory,
       strDrinkAlternate: data.strDrinkAlternate || "",
@@ -30,6 +30,7 @@ export const CreateNewRecipe = () => {
       strInstructions: data.strInstructions,
       strMealThumb: data.strMealThumb || "",
       strTags: data.strTags ? data.strTags.split(",") : [],
+      strYoutube: data.strYoutube || "",
       ingredients: [data.strIngredients1 || ""],
       ...data.ingredients
         .filter((pair) => pair.ingredient.trim() !== "")
@@ -52,7 +53,11 @@ export const CreateNewRecipe = () => {
   return (
     <Container>
       <h2>Create New Recipe</h2>
-      <form className="newRecipe-form " onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="newRecipe-form "
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <label htmlFor="strMeal">Meal name</label>
         <input
           id="strMeal"
@@ -123,7 +128,7 @@ export const CreateNewRecipe = () => {
           {...register("strMealThumb", {
             pattern: {
               value:
-                /^(https?:\/\/)?(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/,
+                /^(https?:\/\/)([a-z0-9-]+\.)+[a-z]{2,}([\/\w .-]*)*\/?(\?.*)?$/,
               message: "Please enter a valid URL",
             },
             required: { value: true, message: "URL is required" },

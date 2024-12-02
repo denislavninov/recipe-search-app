@@ -25,13 +25,13 @@ export const Navbar = () => {
             </li>
             <li>
               <NavLink to="/" onClick={handleLogout}>
-                Logout
+                Log Out
               </NavLink>
             </li>
           </>
         ) : (
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login">Log In</NavLink>
           </li>
         )}
       </ul>

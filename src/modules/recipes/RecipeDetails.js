@@ -16,6 +16,7 @@ export const RecipeDetails = ({ selectedRecipe, onBack }) => {
           ))}
       </ul>
       <button onClick={onBack}>Back to Recipe List</button>
+      <p>ID: {selectedRecipe.id}</p>
     </div>
   );
 };
