@@ -3,10 +3,10 @@ import { RecipeList } from "./modules/recipes/RecipeList";
 import { SearchBar } from "./modules/recipes/search-bar";
 import { RecipeDetails } from "./modules/recipes/RecipeList/index";
 import { CreateNewRecipe } from "./modules/recipes/NewRecipeForm/CreateRecipe";
-import { Categories } from "./modules/categories/Categories";
-import { RecipeListByCategory } from "./modules/categories/RecipeListByCategory";
 import { Login } from "./modules/user/Login";
 import { Register } from "./modules/user/Register";
+import { Categories } from "./modules/recipes/Categories";
+import { RecipeListByCategory } from "./modules/recipes/RecipeListByCategory";
 
 export const AppRouter = () => {
   return (
