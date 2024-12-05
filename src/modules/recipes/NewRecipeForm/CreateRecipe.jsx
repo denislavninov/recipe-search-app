@@ -22,7 +22,7 @@ export const CreateNewRecipe = () => {
 
   const onSubmit = (data) => {
     const formattedData = {
-      id: Date.now(),
+      idMeal: Date.now(),
       strMeal: data.strMeal,
       strCategory: data.strCategory,
       strDrinkAlternate: data.strDrinkAlternate || "",
