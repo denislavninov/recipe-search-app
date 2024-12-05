@@ -11,9 +11,9 @@ export const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [recipes, setRecipes] = useState([]); // State to hold recipes for the selected category
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipeLoading, setRecipeLoading] = useState(false);
+  const [recipes, setRecipes] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,8 +31,18 @@ export const Categories = () => {
     getCategories();
   }, []);
 
-  const handleCategorySelect = (categoryName) => {
+  const handleCategorySelect = async (categoryName) => {
     navigate(`/recipes/${categoryName}`);
+    // Fetch recipes for the selected category
+    try {
+      setRecipeLoading(true);
+      const fetchedRecipes = await fetchRecipesByCategory(categoryName);
+      setRecipes(fetchedRecipes);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setRecipeLoading(false);
+    }
   };
 
   const handleRecipeSelect = (recipe) => {

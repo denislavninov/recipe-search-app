@@ -16,7 +16,7 @@ export const RecipeDetails = () => {
     fetchRecipesByIngredient("chicken_breast").then((recipes) =>
       dispatch({ type: RECIPE_ACTIONS.update, payload: recipes }),
     );
-  }, []);
+  }, [dispatch]);
 
   const handleRecipeClick = (idMeal) => {
     fetchRecipesById(idMeal)

@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  fetchRecipesByIngredient,
-  searchRecipesByName,
-} from "../recipeService";
+import { searchRecipesByName } from "../recipeService";
 
 import { useRecipesDispatch, RECIPE_ACTIONS } from "../RecipesProvider";
 

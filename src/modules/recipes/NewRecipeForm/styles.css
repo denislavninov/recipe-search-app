@@ -1,0 +1,144 @@
+.newRecipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* styles.css */
+input, select, textarea {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Geçiş efekti */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #FF6347; /* Odaklandığında kenar rengi */
+  box-shadow: 0 0 5px rgba(255, 99, 71, 0.5); /* Hafif gölge */
+}
+
+h2 {
+  font-size: 2rem; /* Daha büyük başlık boyutu */
+  color: #FF6347; /* Başlık rengi */
+  text-align: center;
+  margin-bottom: 20px; /* Alt boşluk */
+}
+/* styles.css */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.submit-button {
+  background-color: #FF6347;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s; /* Geçiş efekti */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(255, 99, 71, 0.2);
+  margin-top: 20px;
+}
+
+.submit-button:hover {
+  background-color: #e5533d;
+  transform: scale(1.05); /* Hover durumunda büyütme */
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+}
+
+.ingredients-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #f9f9f9;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.ingredient-pair {
+  background-color: transparent ;
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin: 6px;
+}
+.ingredient-inputs {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.add-ingredient {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.add-ingredient:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+.remove-ingredient {
+  background-color: #ff4444;
+  color: white;
+  padding: 2px 6px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s, transform 0.2s;
+  min-width: 56px;
+}
+
+.remove-ingredient:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
+
+.remove-ingredient:active {
+  transform: translateY(1px);
+}
+
+label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+h3 {
+  color: #FF6347;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #FF634730;
+  padding-bottom: 5px;
+}
