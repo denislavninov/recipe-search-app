@@ -1,10 +1,10 @@
-.container {
+/* .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: "Roboto", sans-serif;
   background-color: #f9f9f9;
-}
+} */
 
 .search-bar {
   display: flex;
