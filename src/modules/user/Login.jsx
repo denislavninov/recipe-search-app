@@ -1,31 +1,55 @@
 import React, { useState } from "react";
 import { useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import { Container } from "../../shared-component/Container/index";
-import { Button } from "../../shared-component/Button/index";
-import { Input } from "../../shared-component/Input/index";
 import { validateEmail } from "../../utils";
+import Container from "@mui/material/Container";
+import {
+  Avatar,
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+  FormControl,
+  FormControlLabel,
+  Checkbox,
+  InputAdornment,
+} from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export const Login = () => {
   const dispatch = useUserDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [userNameError, setUsernameError] = useState("");
+  const [passwordError, setpasswordError] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    let hasError = false;
+
     if (!username || !password) {
       setError("Username and password are required.");
-      return;
-    }
-    if (!validateEmail(username)) {
-      setError("Invalid email format");
-      return;
+      hasError = true;
+    } else if (!validateEmail(username)) {
+      setUsernameError("Invalid email format");
+      hasError = true;
+    } else {
+      setUsernameError("");
     }
     if (password.length < 4) {
-      setError("Password must be at least 4 characters.");
-      return;
+      setpasswordError("Password must be at least 4 characters.");
+      hasError = true;
+    } else {
+      setpasswordError("");
     }
+    if (hasError) return;
 
     dispatch({ type: "LOGIN", payload: { username, password } });
     console.log("User logged in:", { username, password });
@@ -33,37 +57,115 @@ export const Login = () => {
     navigate("/");
   };
 
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <Container>
-      <h1 className="shared-h1">Login</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+    <Container maxWidth="xs">
+      <Paper elevation={8} sx={{ marginTop: 50, padding: 2 }}>
+        <Avatar
+          sx={{
+            mx: "auto",
+            bgcolor: "secondary.main",
+            textAlign: "center",
+          }}
+        >
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5" textAlign={"center"}>
+          Log In
+        </Typography>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleLogin();
-        }}
-      >
-        <label htmlFor="email-input">Email</label>
-        <Input
-          id="email-input"
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label htmlFor="password-input">Password</label>
-        <Input
-          id="password-input"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <Box
+          component="form"
+          sx={{ mt: 1 }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+        >
+          <TextField
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            fullWidth
+            autoFocus
+            sx={{ mb: 2 }}
+            error={!!userNameError}
+            id="outlined-error-helper-text-username"
+            label="E Mail"
+            helperText={userNameError}
+            autoComplete="current-username"
+          />
 
-        <Button type="submit">Log in</Button>
-        <Button onClick={() => navigate("/register")}>Register</Button>
-      </form>
+          <TextField
+            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+            error={!!passwordError}
+            id="outlined-error-helper-text-password"
+            label="Password"
+            helperText={passwordError}
+            sx={{ mb: 2 }}
+            autoComplete="current-password"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label={
+                      showPassword
+                        ? "hide the password"
+                        : "display the password"
+                    }
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    onMouseUp={handleMouseUpPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <FormControl>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="secondary" />}
+              label="Remember me"
+            />
+          </FormControl>
+          <Stack spacing={3}>
+            <Button type="submit" variant="contained" color="secondary">
+              Log In
+            </Button>
+
+            <Typography component={"p"} textAlign="center">
+              Don't have an account?{" "}
+              <Button
+                variant="text"
+                color="primary"
+                onClick={() => navigate("/register")}
+              >
+                Register here
+              </Button>
+            </Typography>
+          </Stack>
+        </Box>
+      </Paper>
     </Container>
   );
 };
