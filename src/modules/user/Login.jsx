@@ -71,7 +71,15 @@ export const Login = () => {
 
   return (
     <Container maxWidth="xs">
-      <Paper elevation={8} sx={{ marginTop: 50, padding: 2 }}>
+      <Paper
+        elevation={4}
+        sx={{
+          marginTop: { xs: 6, sm: 8, md: 10, lg: 15, xl: 30 },
+          padding: { xs: 2, sm: 3, md: 4, lg: 5, xl: 6 },
+          width: "100%",
+          maxWidth: 500,
+        }}
+      >
         <Avatar
           sx={{
             mx: "auto",
@@ -81,7 +89,13 @@ export const Login = () => {
         >
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" textAlign={"center"}>
+        <Typography
+          component="h1"
+          variant="h5"
+          textAlign={"center"}
+          gutterBottom
+          color="secondary"
+        >
           Log In
         </Typography>
 
@@ -103,9 +117,10 @@ export const Login = () => {
             sx={{ mb: 2 }}
             error={!!userNameError}
             id="outlined-error-helper-text-username"
-            label="E Mail"
+            label="Email"
             helperText={userNameError}
             autoComplete="current-username"
+            color="secondary"
           />
 
           <TextField
@@ -121,6 +136,7 @@ export const Login = () => {
             helperText={passwordError}
             sx={{ mb: 2 }}
             autoComplete="current-password"
+            color="secondary"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -134,6 +150,7 @@ export const Login = () => {
                     onMouseDown={handleMouseDownPassword}
                     onMouseUp={handleMouseUpPassword}
                     edge="end"
+                    color="secondary"
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -149,12 +166,12 @@ export const Login = () => {
             />
           </FormControl>
           <Stack spacing={3}>
-            <Button type="submit" variant="contained" color="secondary">
+            <Button type="submit" variant="contained" color="primary">
               Log In
             </Button>
 
-            <Typography component={"p"} textAlign="center">
-              Don't have an account?{" "}
+            <Typography component={"p"} textAlign="center" color="secondary">
+              Don't you have an account?{" "}
               <Button
                 variant="text"
                 color="primary"

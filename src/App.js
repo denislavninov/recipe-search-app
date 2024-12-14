@@ -5,6 +5,7 @@ import { AppRouter } from "./AppRouter";
 import { UserProvider } from "./modules/user/UserContext";
 import Container from "@mui/material/Container";
 import { NavBar } from "./shared-component/navbar";
+import { UnstyledSnackbarIntroduction } from "./shared-component/MuiSnackBar/index";
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
 
           <Container maxWidth="xl" sx={{ mt: 4 }}>
             <AppRouter />
+            <UnstyledSnackbarIntroduction />
           </Container>
         </>
       </RecipesProvider>
