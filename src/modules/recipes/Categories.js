@@ -1,10 +1,12 @@
+import { Grid, Card, CardMedia, CardContent, Typography } from "@mui/material";
+// ... existing imports ...
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   fetchCategories,
   fetchRecipesByCategory,
-} from "../recipes/recipeService";
-import { RecipeDetails } from "../recipes/RecipeDetails";
+} from "../../modules/recipes/recipeService";
+import { RecipeDetails } from "../../modules/recipes/RecipeDetails";
 
 export const Categories = () => {
   // Fetch categories from API and display them
@@ -63,21 +65,43 @@ export const Categories = () => {
       ) : (
         <>
           <h2>Categories</h2>
-          <ul className="categories-list">
+          <Grid container spacing={6}>
             {categories.map((category) => (
-              <li key={category.idCategory} className="category-item">
-                <button
+              <Grid item xs={12} sm={3} md={2} key={category.idCategory}>
+                <Card
                   onClick={() => handleCategorySelect(category.strCategory)}
                 >
-                  <img
-                    src={category.strCategoryThumb}
+                  <CardMedia
+                    component="img"
+                    height="200"
+                    image={category.strCategoryThumb}
                     alt={category.strCategory}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                    sx={{
+                      transition: "transform 0.4s",
+                      cursor: "pointer",
+                    }}
                   />
-                  <h3>{category.strCategory}</h3>
-                </button>
-              </li>
+                  <CardContent>
+                    <Typography
+                      variant="h5"
+                      component="div"
+                      sx={{
+                        textAlign: "center",
+                      }}
+                    >
+                      {category.strCategory}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             ))}
-          </ul>
+          </Grid>
           {recipeLoading ? (
             <h2>Loading Recipes...</h2>
           ) : (
