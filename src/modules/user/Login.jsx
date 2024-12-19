@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUserDispatch } from "./UserContext";
+import { useUserDispatch, useUser } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils";
 import Container from "@mui/material/Container";
@@ -25,11 +25,18 @@ export const Login = () => {
   const dispatch = useUserDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const user = useUser();
   const [error, setError] = useState("");
   const [userNameError, setUsernameError] = useState("");
   const [passwordError, setpasswordError] = useState("");
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (user && user.email) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleLogin = () => {
     let hasError = false;

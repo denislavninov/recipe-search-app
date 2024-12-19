@@ -1,4 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Stack,
+} from "@mui/material";
 import {
   useRecipesDispatch,
   RECIPE_ACTIONS,
@@ -31,26 +39,47 @@ export const RecipeDetails = () => {
   return (
     <>
       {selectedRecipe ? (
-        <div className="recipe-details">
-          <h2>{selectedRecipe.strMeal}</h2>
-          <img
-            src={selectedRecipe.strMealThumb}
+        <Card sx={{ maxWidth: 600, margin: "auto", padding: 2, boxShadow: 3 }}>
+          <CardMedia
+            component="img"
+            height="300"
+            image={selectedRecipe.strMealThumb}
             alt={selectedRecipe.strMeal}
-          ></img>
-          <p>{selectedRecipe.strInstructions}</p>
-          <ul>
-            {Object.keys(selectedRecipe)
-              .filter(
-                (key) => key.startsWith("strIngredient") && selectedRecipe[key],
-              )
-              .map((key) => (
-                <li key={key}>{selectedRecipe[key]}</li>
-              ))}
-          </ul>
-          <button onClick={() => setSelectedRecipe(null)}>
-            Back to Recipe List
-          </button>
-        </div>
+            sx={{ borderRadius: 2 }} // Rounded corners for the image
+          />
+          <CardContent>
+            <Typography variant="h4" component="div" gutterBottom>
+              {selectedRecipe.strMeal}
+            </Typography>
+            <Typography variant="body1" paragraph>
+              {selectedRecipe.strInstructions}
+            </Typography>
+            <Stack spacing={1}>
+              <Typography variant="h6">Ingredients:</Typography>
+              <ul>
+                {Object.keys(selectedRecipe)
+                  .filter(
+                    (key) =>
+                      key.startsWith("strIngredient") && selectedRecipe[key],
+                  )
+                  .map((key) => (
+                    <li key={key}>
+                      <Typography variant="body2">
+                        {selectedRecipe[key]}
+                      </Typography>
+                    </li>
+                  ))}
+              </ul>
+            </Stack>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setSelectedRecipe(null)}
+            >
+              Back to Recipe List
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
         <RecipeList recipes={recipes} onRecipeClick={handleRecipeClick} />
       )}

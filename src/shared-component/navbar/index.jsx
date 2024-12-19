@@ -54,7 +54,7 @@ export const NavBar = () => {
 
   return (
     <AppBar position="static" color="primary">
-      <Container maxWidth="xl">
+      <Container maxWidth="xxl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"

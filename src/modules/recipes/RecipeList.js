@@ -20,27 +20,23 @@ export const RecipeList = ({ recipes, onRecipeClick }) => {
   return Array.isArray(recipes) && recipes.length > 0 ? (
     <Box
       sx={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 1 / 2,
-        height: 1 / 2,
-        overflowY: "scroll",
-        mt: 4,
-        borderRadius: 1,
-        boxShadow: 3,
+        display: "flex,",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100%",
+        padding: 2,
+        overflowY: "auto",
       }}
     >
       <ImageList variant="masonry" cols={3} gap={12} sx={{ m: 1 }}>
         {recipes.map((recipe) => (
-          <ImageListItem key={recipe.idMeal} sx={{ m: 1 }}>
+          <ImageListItem key={recipe.idMeal} sx={{ m: 2 }}>
             <img
               src={`${recipe.strMealThumb}`}
               alt={recipe.strMeal}
               loading="lazy"
               onClick={() => handleClick(recipe.idMeal)}
-              style={{ borderRadius: "2px", transition: "transform 0.4s" }}
+              style={{ borderRadius: "2   px", transition: "transform 0.4s" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.transform = "scale(1.05)")
               } // Hover effect
@@ -56,6 +52,7 @@ export const RecipeList = ({ recipes, onRecipeClick }) => {
                 background:
                   "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5))",
                 variant: "standart",
+                borderRadius: "2px",
               }}
             />
           </ImageListItem>
