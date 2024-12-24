@@ -5,15 +5,19 @@ import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecipesProvider } from "./modules/recipes/RecipesProvider";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { apptTheme as appTheme } from "./styles/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <RecipesProvider>
-        <App />
-      </RecipesProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={appTheme}>
+      <BrowserRouter>
+        <RecipesProvider>
+          <App />
+        </RecipesProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
 );
 

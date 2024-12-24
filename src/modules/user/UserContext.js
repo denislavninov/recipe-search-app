@@ -17,6 +17,17 @@ const userReducer = (state, action) => {
     localStorage.setItem("user", JSON.stringify(newUser));
     return { ...state, user: newUser, users: [...state.users, newUser] };
   }
+
+  if (action.type === "LOGIN") {
+    const loggedInUser = {
+      email: action.payload.username,
+    };
+    return { ...state, user: loggedInUser };
+  }
+
+  if (action.type === "LOGOUT") {
+    return { ...state, user: null };
+  }
   return state;
 };
 

@@ -7,11 +7,13 @@ import { Login } from "./modules/user/Login";
 import { Register } from "./modules/user/Register";
 import { Categories } from "./modules/recipes/Categories";
 import { RecipeListByCategory } from "./modules/recipes/RecipeListByCategory";
+import Logout from "./modules/user/Logout";
 
 export const AppRouter = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+
       <Route path="/register" element={<Register />} />
       <Route path="/recipes">
         <Route path="new" element={<CreateNewRecipe />} />
@@ -21,7 +23,6 @@ export const AppRouter = () => {
           <Route index element={<Categories />} />
         </Route>
       </Route>
-
       <Route
         path="/"
         element={
@@ -32,6 +33,8 @@ export const AppRouter = () => {
           </>
         }
       />
+      <Route path="/logout" element={<Logout />} />
+
       <Route path="*" element={<h1>Page not found</h1>} />
     </Routes>
   );
