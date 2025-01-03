@@ -36,16 +36,24 @@ export const CreateNewRecipe = () => {
 
     formState: { errors },
   } = useForm({
-    strMeal: "",
-    strCategory: "",
-    ingredients: [{ ingredient: "", measure: "" }],
+    defaultValues: {
+      strMeal: "",
+      strCategory: "",
+      strArea: "",
+      strInstructions: "",
+      strDrinkAlternate: "",
+      strMealThumb: "",
+      strTags: "",
+      strYoutube: "",
+      ingredients: [{ ingredient: "", measure: "" }],
+    },
   });
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false); // Close Snackbar
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     const formattedData = {
       idMeal: Date.now(),
       strMeal: data.strMeal,
@@ -58,9 +66,9 @@ export const CreateNewRecipe = () => {
       strYoutube: data.strYoutube || "",
       ingredients: [data.strIngredients1 || ""],
       ...data.ingredients
-        .filter((pair) => pair.ingredient.trim() !== "")
+        .filter((pair: { ingredient: string; measure: string }) => pair.ingredient.trim() !== "")
         .reduce(
-          (acc, pair, index) => ({
+          (acc: { [key: string]: string }, pair: { ingredient: string; measure: string }, index: number) => ({
             ...acc,
             [`strIngredient${index + 1}`]: pair.ingredient,
             [`strMeasure${index + 1}`]: pair.measure,
@@ -114,7 +122,6 @@ export const CreateNewRecipe = () => {
         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             type="text"
-            name="strMeal"
             fullWidth
             placeholder="Enter the meal name"
             autoFocus
@@ -161,7 +168,7 @@ export const CreateNewRecipe = () => {
               <MenuItem value="">
                 <em>Select a category</em>
               </MenuItem>
-              {categories.map((category) => (
+              {Object.values(Categories).map((category) => (
                 <MenuItem key={category} value={category}>
                   {category}
                 </MenuItem>
@@ -187,7 +194,7 @@ export const CreateNewRecipe = () => {
               <MenuItem value="">
                 <em>Select an area</em>
               </MenuItem>
-              {areas.map((area) => (
+              {Object.values(Areas).map((area) => (
                 <MenuItem key={area} value={area}>
                   {area}
                 </MenuItem>
@@ -226,7 +233,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strDrinkAlternate"
             fullWidth
             placeholder="Enter the drink name"
             autoFocus
@@ -240,7 +246,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strMealThumb"
             fullWidth
             placeholder="https://www.example.com/image.jpg"
             sx={{ mb: 2 }}
@@ -277,7 +282,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strYoutube"
             fullWidth
             placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             sx={{ mb: 2 }}
@@ -374,51 +378,51 @@ export const CreateNewRecipe = () => {
   );
 };
 
-const categories = [
-  "Beef",
-  "Chicken",
-  "Dessert",
-  "Lamb",
-  "Miscellaneous",
-  "Pasta",
-  "Pork",
-  "Seafood",
-  "Side",
-  "Starter",
-  "Vegan",
-  "Vegetarian",
-  "Breakfast",
-  "Goat",
-];
+enum Categories {
+  Beef = "Beef",
+  Chicken = "Chicken",
+  Dessert = "Dessert",
+  Lamb = "Lamb",
+  Miscellaneous = "Miscellaneous",
+  Pasta = "Pasta",
+  Pork = "Pork",
+  Seafood = "Seafood",
+  Side = "Side",
+  Starter = "Starter",
+  Vegan = "Vegan",
+  Vegetarian = "Vegetarian",
+  Breakfast = "Breakfast",
+  Goat = "Goat",
+}
 
-const areas = [
-  "American",
-  "British",
-  "Canadian",
-  "Chinese",
-  "Croatian",
-  "Dutch",
-  "Egyptian",
-  "Filipino",
-  "French",
-  "Greek",
-  "Indian",
-  "Irish",
-  "Italian",
-  "Jamaican",
-  "Japanese",
-  "Kenyan",
-  "Malaysian",
-  "Mexican",
-  "Moroccan",
-  "Polish",
-  "Portuguese",
-  "Russian",
-  "Spanish",
-  "Thai",
-  "Tunisian",
-  "Turkish",
-  "Ukrainian",
-  "Unknown",
-  "Vietnamese",
-];
+enum Areas {
+  American = "American",
+  British = "British",
+  Canadian = "Canadian",
+  Chinese = "Chinese",
+  Croatian = "Croatian",
+  Dutch = "Dutch",
+  Egyptian = "Egyptian",
+  Filipino = "Filipino",
+  French = "French",
+  Greek = "Greek",
+  Indian = "Indian",
+  Irish = "Irish",
+  Italian = "Italian",
+  Jamaican = "Jamaican",
+  Japanese = "Japanese",
+  Kenyan = "Kenyan",
+  Malaysian = "Malaysian",
+  Mexican = "Mexican",
+  Moroccan = "Moroccan",
+  Polish = "Polish",
+  Portuguese = "Portuguese",
+  Russian = "Russian",
+  Spanish = "Spanish",
+  Thai = "Thai",
+  Tunisian = "Tunisian",
+  Turkish = "Turkish",
+  Ukrainian = "Ukrainian",
+  Unknown = "Unknown",
+  Vietnamese = "Vietnamese",
+}

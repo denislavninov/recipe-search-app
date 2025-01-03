@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { searchRecipesByName } from "../recipeService";
 import { useRecipesDispatch, RECIPE_ACTIONS } from "../RecipesProvider";
 import { TextField, Button, Box, InputAdornment } from "@mui/material";
@@ -8,11 +8,11 @@ export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const dispatch = useRecipesDispatch();
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value.trim());
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const recipes = await searchRecipesByName(query);
     dispatch({ type: RECIPE_ACTIONS.update, payload: recipes });
@@ -52,22 +52,19 @@ export const SearchBar = () => {
             </InputAdornment>
           ),
           sx: {
-            borderRadius: "10", // Dairevi kenarları kaldır
+            borderRadius: "10",
             "& .MuiOutlinedInput-notchedOutline": {
-              border: "1", // Kenar çizgilerini kaldır
+              border: "1",
             },
-            borderRadius: "10",
-
             "&:hover .MuiOutlinedInput-notchedOutline": {
-              border: "1", // Hover durumunda kenar çizgilerini kaldır
+              border: "1",
             },
-            borderRadius: "10",
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              border: "none", // Focus durumunda kenar çizgilerini kaldır
+              border: "none",
             },
             "& .MuiInputBase-root": {
-              borderBottom: "2px solid", // Sadece alt kenarı belirgin hale getir
-              borderColor: "primary.main", // Alt kenarın rengini ayarla
+              borderBottom: "2px solid",
+              borderColor: "primary.main",
             },
           },
         }}

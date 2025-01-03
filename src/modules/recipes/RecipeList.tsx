@@ -1,17 +1,30 @@
-import React from "react";
 import { Box } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
-export const RecipeList = ({ recipes, onRecipeClick }) => {
+interface Recipe {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  // Add other properties as needed
+}
+
+interface RecipeListProps {
+  recipes: Recipe[];
+  onRecipeClick: (recipeId: string) => void;
+}
+
+export const RecipeList = ({ recipes, onRecipeClick }: RecipeListProps) => {
   console.log("Recipes:", recipes); // Debug: Check if recipes are being passed correctly
   console.log("onRecipeClick:", onRecipeClick); // Debug: Check if onRecipeClick is a function
 
-  const handleClick = (recipeId) => {
+  const handleClick = (recipeId: string | undefined) => {
     console.log("Clicked recipe:", recipeId); // Debug: Check if click is registered
-    if (typeof onRecipeClick === "function") {
+    if (recipeId && typeof onRecipeClick === "function") {
       onRecipeClick(recipeId);
+    } else if (!recipeId) {
+      console.error("Recipe ID is undefined");
     } else {
       console.error("onRecipeClick is not a function");
     }
@@ -36,7 +49,7 @@ export const RecipeList = ({ recipes, onRecipeClick }) => {
               alt={recipe.strMeal}
               loading="lazy"
               onClick={() => handleClick(recipe.idMeal)}
-              style={{ borderRadius: "2   px", transition: "transform 0.4s" }}
+              style={{ borderRadius: "2px", transition: "transform 0.4s" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.transform = "scale(1.05)")
               } // Hover effect

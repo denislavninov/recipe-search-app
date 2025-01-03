@@ -14,9 +14,15 @@ import {
 } from "../RecipesProvider";
 import { fetchRecipesByIngredient, fetchRecipesById } from "../recipeService";
 import { RecipeList } from "../RecipeList";
+interface Recipe {
+  strMealThumb: string;
+  strMeal: string;
+  strInstructions: string;
+  [key: string]: any; // For other dynamic properties like ingredients
+}
 
 export const RecipeDetails = () => {
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const recipes = useRecipes();
   const dispatch = useRecipesDispatch();
 
@@ -26,7 +32,7 @@ export const RecipeDetails = () => {
     );
   }, [dispatch]);
 
-  const handleRecipeClick = (idMeal) => {
+  const handleRecipeClick = (idMeal: string) => {
     fetchRecipesById(idMeal)
       .then((recipeDetails) => {
         console.log("Fetched recipe details:", recipeDetails);
@@ -86,3 +92,4 @@ export const RecipeDetails = () => {
     </>
   );
 };
+

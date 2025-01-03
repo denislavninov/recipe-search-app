@@ -7,7 +7,13 @@ import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useNavigate } from "react-router-dom";
 
-export const RecipeItem = ({ recipe }) => {
+interface Recipe {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
+
+export const RecipeItem = ({ recipe }: { recipe: Recipe }) => {
   const navigate = useNavigate();
 
   const handleRecipeClick = () => {
