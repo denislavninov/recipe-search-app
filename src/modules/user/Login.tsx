@@ -28,12 +28,11 @@ export const Login = () => {
   const user = useUser();
   const [error, setError] = useState("");
   const [userNameError, setUsernameError] = useState("");
-  const [passwordError, setpasswordError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
-
   React.useEffect(() => {
-    if (user && user.email) {
+    if (user && user.user && user.user.email) {
       navigate("/");
     }
   }, [user, navigate]);
@@ -51,14 +50,14 @@ export const Login = () => {
       setUsernameError("");
     }
     if (password.length < 4) {
-      setpasswordError("Password must be at least 4 characters.");
+      setPasswordError("Password must be at least 4 characters.");
       hasError = true;
     } else {
-      setpasswordError("");
+      setPasswordError("");
     }
     if (hasError) return;
 
-    dispatch({ type: "LOGIN", payload: { username, password } });
+    dispatch({ type: "LOGIN", payload: { email: username, name: "Default Name" } });
     console.log("User logged in:", { username, password });
 
     navigate("/");
@@ -68,11 +67,11 @@ export const Login = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event) => {
+  const handleMouseDownPassword = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (event) => {
+  const handleMouseUpPassword = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
 

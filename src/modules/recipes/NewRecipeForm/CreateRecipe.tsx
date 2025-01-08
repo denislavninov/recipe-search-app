@@ -20,6 +20,8 @@ import {
 } from "@mui/material";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { UnstyledSnackbarIntroduction } from "../../../shared-component/MuiSnackBar";
+import { Categories } from "../Categories";
+import { Areas } from "../models/Area";
 
 export const CreateNewRecipe = () => {
   const dispatch = useRecipesDispatch();
@@ -378,51 +380,4 @@ export const CreateNewRecipe = () => {
   );
 };
 
-enum Categories {
-  Beef = "Beef",
-  Chicken = "Chicken",
-  Dessert = "Dessert",
-  Lamb = "Lamb",
-  Miscellaneous = "Miscellaneous",
-  Pasta = "Pasta",
-  Pork = "Pork",
-  Seafood = "Seafood",
-  Side = "Side",
-  Starter = "Starter",
-  Vegan = "Vegan",
-  Vegetarian = "Vegetarian",
-  Breakfast = "Breakfast",
-  Goat = "Goat",
-}
 
-enum Areas {
-  American = "American",
-  British = "British",
-  Canadian = "Canadian",
-  Chinese = "Chinese",
-  Croatian = "Croatian",
-  Dutch = "Dutch",
-  Egyptian = "Egyptian",
-  Filipino = "Filipino",
-  French = "French",
-  Greek = "Greek",
-  Indian = "Indian",
-  Irish = "Irish",
-  Italian = "Italian",
-  Jamaican = "Jamaican",
-  Japanese = "Japanese",
-  Kenyan = "Kenyan",
-  Malaysian = "Malaysian",
-  Mexican = "Mexican",
-  Moroccan = "Moroccan",
-  Polish = "Polish",
-  Portuguese = "Portuguese",
-  Russian = "Russian",
-  Spanish = "Spanish",
-  Thai = "Thai",
-  Tunisian = "Tunisian",
-  Turkish = "Turkish",
-  Ukrainian = "Ukrainian",
-  Unknown = "Unknown",
-  Vietnamese = "Vietnamese",
-}

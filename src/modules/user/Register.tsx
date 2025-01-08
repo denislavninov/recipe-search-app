@@ -1,4 +1,4 @@
-import { useState } from "react"; // Removed useContext
+import React, { useState } from "react"; // Ensure React is imported
 import { useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils";
@@ -23,6 +23,16 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+type UserAction = {
+  type: "REGISTER_USER";
+  payload: {
+    name: string;
+    email: string;
+    password: string;
+    gender: string;
+  };
+};
+
 export const Register = () => {
   const dispatch = useUserDispatch(); // Use the useUser hook to get dispatch
   const navigate = useNavigate();
@@ -34,13 +44,13 @@ export const Register = () => {
   }); // State for form data
   const [error, setError] = useState("");
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value })); // Update state on input change
     setError("");
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {

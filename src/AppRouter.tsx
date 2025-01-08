@@ -8,12 +8,18 @@ import { Register } from "./modules/user/Register";
 import { Categories } from "./modules/recipes/Categories";
 import { RecipeListByCategory } from "./modules/recipes/RecipeListByCategory";
 import Logout from "./modules/user/Logout";
+import { Recipe } from "./modules/recipes/types";
 
 export const AppRouter = () => {
+  // Example data and function for demonstration
+  const recipes: Recipe[] = []; // Replace with actual recipe data
+  const handleRecipeClick = (recipeId: string) => {
+    console.log(`Recipe clicked: ${recipeId}`);
+  };
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-
       <Route path="/register" element={<Register />} />
       <Route path="/recipes">
         <Route path="new" element={<CreateNewRecipe />} />
@@ -29,12 +35,11 @@ export const AppRouter = () => {
           <>
             <SearchBar />
             <RecipeDetails />
-            <RecipeList />
+            <RecipeList recipes={recipes} onRecipeClick={handleRecipeClick} />
           </>
         }
       />
       <Route path="/logout" element={<Logout />} />
-
       <Route path="*" element={<h1>Page not found</h1>} />
     </Routes>
   );

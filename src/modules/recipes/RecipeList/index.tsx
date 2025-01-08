@@ -14,12 +14,7 @@ import {
 } from "../RecipesProvider";
 import { fetchRecipesByIngredient, fetchRecipesById } from "../recipeService";
 import { RecipeList } from "../RecipeList";
-interface Recipe {
-  strMealThumb: string;
-  strMeal: string;
-  strInstructions: string;
-  [key: string]: any; // For other dynamic properties like ingredients
-}
+import { Recipe } from "../types";
 
 export const RecipeDetails = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
@@ -41,6 +36,19 @@ export const RecipeDetails = () => {
       })
       .catch((error) => console.error("Error fetching recipe details:", error));
   };
+
+  // Validate recipes before rendering
+  const validateRecipes = (recipes: any[]): Recipe[] => {
+    return recipes.map((recipe) => ({
+      idMeal: recipe.idMeal || "",
+      strMeal: recipe.strMeal || "",
+      strMealThumb: recipe.strMealThumb || "default-image-url", // Provide a default image if missing
+      strInstructions: recipe.strInstructions || "No instructions available.",
+      ...recipe,
+    }));
+  };
+
+  const validatedRecipes = validateRecipes(recipes);
 
   return (
     <>
@@ -87,7 +95,7 @@ export const RecipeDetails = () => {
           </CardContent>
         </Card>
       ) : (
-        <RecipeList recipes={recipes} onRecipeClick={handleRecipeClick} />
+        <RecipeList recipes={validatedRecipes} onRecipeClick={handleRecipeClick} />
       )}
     </>
   );

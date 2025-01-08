@@ -2,15 +2,9 @@ import { Box } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { Recipe } from "./types";
 
-interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  // Add other properties as needed
-}
-
-interface RecipeListProps {
+export interface RecipeListProps {
   recipes: Recipe[];
   onRecipeClick: (recipeId: string) => void;
 }
