@@ -1,4 +1,4 @@
-export enum Categories {
+export enum Category {
   Beef = "Beef",
   Chicken = "Chicken",
   Dessert = "Dessert",

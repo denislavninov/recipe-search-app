@@ -8,7 +8,7 @@ import { Register } from "./modules/user/Register";
 import { Categories } from "./modules/recipes/Categories";
 import { RecipeListByCategory } from "./modules/recipes/RecipeListByCategory";
 import Logout from "./modules/user/Logout";
-import { Recipe } from "./modules/recipes/types";
+import { Recipe } from "./modules/recipes/models/recipe";
 
 export const AppRouter = () => {
   // Example data and function for demonstration

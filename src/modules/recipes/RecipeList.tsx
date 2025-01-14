@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { Recipe } from "./types";
+import { Recipe } from "./models/recipe";
 
 export interface RecipeListProps {
   recipes: Recipe[];

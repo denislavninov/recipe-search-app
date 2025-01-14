@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchRecipesByCategory } from "./recipeService"; // Create this function to fetch recipes by category
-
-interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  // Add other properties as needed
-}
+import { Recipe } from "./models/recipe"; // Import Recipe from models
 
 export const RecipeListByCategory = () => {
   const { category } = useParams(); // Get the category from the URL
@@ -42,9 +37,8 @@ export const RecipeListByCategory = () => {
         <h2>Recipes in {category}</h2>
         {recipes.map((recipe) => (
           <li key={recipe.idMeal} className="recipe-item">
-            {/* {recipe.strMeal} */}
             <Link to={`/recipe/${recipe.strMeal}`}>{recipe.strMeal}</Link>
-          </li> // Display recipe names
+          </li>
         ))}
       </ul>
     </div>

@@ -14,7 +14,7 @@ import {
 } from "../RecipesProvider";
 import { fetchRecipesByIngredient, fetchRecipesById } from "../recipeService";
 import { RecipeList } from "../RecipeList";
-import { Recipe } from "../types";
+import { Recipe } from "../models/recipe";
 
 export const RecipeDetails = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);

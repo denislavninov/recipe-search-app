@@ -1,4 +1,4 @@
-export enum Areas {
+export enum Area {
   American = "American",
   British = "British",
   Canadian = "Canadian",
@@ -29,3 +29,4 @@ export enum Areas {
   Unknown = "Unknown",
   Vietnamese = "Vietnamese",
 }
+export const Areas = Object.values(Area);

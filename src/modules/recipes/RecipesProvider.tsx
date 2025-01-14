@@ -1,15 +1,9 @@
 import { createContext, useReducer, useContext, Dispatch } from "react";
+import { Recipe } from "./models/recipe";
 
 export const RECIPE_ACTIONS = {
   update: "update",
   deleteAll: "delete_all",
-};
-
-// Define the type for the context value
-type Recipe = {
-  idMeal: string;
-  strMeal: string;
-  // Add other properties as needed
 };
 
 type Action = {

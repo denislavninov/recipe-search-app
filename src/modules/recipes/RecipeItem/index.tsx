@@ -6,12 +6,8 @@ import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useNavigate } from "react-router-dom";
+import { Recipe } from "../models/recipe";
 
-interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-}
 
 export const RecipeItem = ({ recipe }: { recipe: Recipe }) => {
   const navigate = useNavigate();

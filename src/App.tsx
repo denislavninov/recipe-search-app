@@ -4,7 +4,7 @@ import "./App.css";
 import { AppRouter } from "./AppRouter";
 import { UserProvider } from "./modules/user/UserContext";
 import Container from "@mui/material/Container";
-import { NavBar } from "./shared-component/navbar/index";
+import { NavBar } from "./shared-component/navbar";
 import { UnstyledSnackbarIntroduction } from "./shared-component/MuiSnackBar/index";
 import { RecipeDetails } from "./modules/recipes/RecipeDetails";
 
