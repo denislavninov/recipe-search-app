@@ -7,19 +7,9 @@ import {
   fetchRecipesByCategory,
 } from "./recipeService";
 import { RecipeDetails } from "./RecipeDetails";
+import { Category, CategoryEnum } from "./models/Category";
+import { Recipe } from "./models/recipe";
 
-interface Recipe {
-  idMeal: string;
-  strMeal: string;
-  // Add other properties as needed
-}
-
-interface Category {
-  idCategory: string;
-  strCategory: string;
-  strCategoryThumb: string;
-  // Add other properties as needed
-}
 
 export const Categories = () => {
   // Fetch categories from API and display them
@@ -46,7 +36,7 @@ export const Categories = () => {
     getCategories();
   }, []);
 
-  const handleCategorySelect = async (categoryName: string) => {
+  const handleCategorySelect = async (categoryName: CategoryEnum) => {
     navigate(`/recipes/${categoryName}`);
     // Fetch recipes for the selected category
     try {
@@ -82,7 +72,7 @@ export const Categories = () => {
             {categories.map((category) => (
               <Grid item xs={12} sm={3} md={2} key={category.idCategory}>
                 <Card
-                  onClick={() => handleCategorySelect(category.strCategory)}
+                  onClick={() => handleCategorySelect(category.strCategory as CategoryEnum)}
                 >
                   <CardMedia
                     component="img"

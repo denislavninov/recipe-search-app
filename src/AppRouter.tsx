@@ -1,5 +1,4 @@
-import { Routes, Route } from "react-router-dom";
-import { RecipeList } from "./modules/recipes/RecipeList";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { SearchBar } from "./modules/recipes/search-bar";
 import { RecipeDetails } from "./modules/recipes/RecipeList/index";
 import { CreateNewRecipe } from "./modules/recipes/NewRecipeForm/CreateRecipe";
@@ -8,15 +7,17 @@ import { Register } from "./modules/user/Register";
 import { Categories } from "./modules/recipes/Categories";
 import { RecipeListByCategory } from "./modules/recipes/RecipeListByCategory";
 import Logout from "./modules/user/Logout";
-import { Recipe } from "./modules/recipes/models/recipe";
+import { RecipeList } from "./modules/recipes/RecipeList";
+import { useRecipes } from "./modules/recipes/RecipesProvider";
 
 export const AppRouter = () => {
-  // Example data and function for demonstration
-  const recipes: Recipe[] = []; // Replace with actual recipe data
-  const handleRecipeClick = (recipeId: string) => {
-    console.log(`Recipe clicked: ${recipeId}`);
-  };
+  const recipes = useRecipes();
+  const navigate = useNavigate();
 
+  const handleRecipeClick = (recipeId: string) => {
+    navigate(`/recipes/${recipeId}`);
+  };
+  // i f i dont define above the handleRecipeClick in the RecipeList component, it will not work, i need to define it here
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

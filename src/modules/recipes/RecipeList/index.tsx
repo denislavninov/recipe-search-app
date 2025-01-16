@@ -38,17 +38,17 @@ export const RecipeDetails = () => {
   };
 
   // Validate recipes before rendering
-  const validateRecipes = (recipes: any[]): Recipe[] => {
-    return recipes.map((recipe) => ({
-      idMeal: recipe.idMeal || "",
-      strMeal: recipe.strMeal || "",
-      strMealThumb: recipe.strMealThumb || "default-image-url", // Provide a default image if missing
-      strInstructions: recipe.strInstructions || "No instructions available.",
-      ...recipe,
-    }));
-  };
+  // const validateRecipes = (recipes: any[]): Recipe[] => {
+  //   return recipes.map((recipe) => ({
+  //     idMeal: recipe.idMeal || "",
+  //     strMeal: recipe.strMeal || "",
+  //     strMealThumb: recipe.strMealThumb || "default-image-url", // Provide a default image if missing
+  //     strInstructions: recipe.strInstructions || "No instructions available.",
+  //     ...recipe,
+  //   }));
+  // };
 
-  const validatedRecipes = validateRecipes(recipes);
+  // const validatedRecipes = validateRecipes(recipes);
 
   return (
     <>
@@ -95,7 +95,7 @@ export const RecipeDetails = () => {
           </CardContent>
         </Card>
       ) : (
-        <RecipeList recipes={validatedRecipes} onRecipeClick={handleRecipeClick} />
+        <RecipeList recipes={recipes} onRecipeClick={handleRecipeClick} />
       )}
     </>
   );

@@ -23,15 +23,6 @@ import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-type UserAction = {
-  type: "REGISTER_USER";
-  payload: {
-    name: string;
-    email: string;
-    password: string;
-    gender: string;
-  };
-};
 
 export const Register = () => {
   const dispatch = useUserDispatch(); // Use the useUser hook to get dispatch
@@ -44,13 +35,13 @@ export const Register = () => {
   }); // State for form data
   const [error, setError] = useState("");
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value })); // Update state on input change
     setError("");
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {

@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./styles.css";
 import { useState } from "react";
 import { useRecipesDispatch } from "../RecipesProvider";
@@ -20,8 +20,9 @@ import {
 } from "@mui/material";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { UnstyledSnackbarIntroduction } from "../../../shared-component/MuiSnackBar";
-import { Categories } from "../Categories";
 import { Areas } from "../models/Area";
+import { NewRecipeFormData } from "../models/NewRecipeData";
+import { CategoryEnum } from "../models/Category";
 
 export const CreateNewRecipe = () => {
   const dispatch = useRecipesDispatch();
@@ -55,22 +56,27 @@ export const CreateNewRecipe = () => {
     setSnackbarOpen(false); // Close Snackbar
   };
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<NewRecipeFormData> = (data) => {
+
+    if (!data.strMealThumb || !data.strInstructions) {
+      setSnackbarMessage("strMealThumb and strInstructions are required.");
+      setSnackbarOpen(true);
+      return; // Prevent submission if validation fails
+    }
     const formattedData = {
-      idMeal: Date.now(),
+      idMeal: Date.now().toString(),
       strMeal: data.strMeal,
       strCategory: data.strCategory,
       strDrinkAlternate: data.strDrinkAlternate || "",
       strArea: data.strArea || "",
       strInstructions: data.strInstructions,
       strMealThumb: data.strMealThumb || "",
-      strTags: data.strTags ? data.strTags.split(",") : [],
+      strTags: data.strTags ? data.strTags.split(',').join(",") : "",
       strYoutube: data.strYoutube || "",
-      ingredients: [data.strIngredients1 || ""],
-      ...data.ingredients
-        .filter((pair: { ingredient: string; measure: string }) => pair.ingredient.trim() !== "")
+      ingredients: data.ingredients
+        .filter((pair) => pair.ingredient.trim() !== "")
         .reduce(
-          (acc: { [key: string]: string }, pair: { ingredient: string; measure: string }, index: number) => ({
+          (acc, pair, index) => ({
             ...acc,
             [`strIngredient${index + 1}`]: pair.ingredient,
             [`strMeasure${index + 1}`]: pair.measure,
@@ -78,11 +84,11 @@ export const CreateNewRecipe = () => {
           {},
         ),
     };
-    dispatch({ type: RECIPE_ACTIONS.update, payload: [formattedData] }); // Use dispatch to add the recipe
+    dispatch({ type: RECIPE_ACTIONS.update, payload: [formattedData] });
     console.log("New recipe added", formattedData);
 
-    setSnackbarMessage("Recipe created successfully!"); // Set Snackbar message
-    setSnackbarOpen(true); // Open Snackbar
+    setSnackbarMessage("Recipe created successfully!");
+    setSnackbarOpen(true);
 
     reset();
   };
@@ -170,7 +176,7 @@ export const CreateNewRecipe = () => {
               <MenuItem value="">
                 <em>Select a category</em>
               </MenuItem>
-              {Object.values(Categories).map((category) => (
+              {Object.values(CategoryEnum).map((category) => (
                 <MenuItem key={category} value={category}>
                   {category}
                 </MenuItem>
