@@ -36,10 +36,10 @@ const pages = [
 ];
 
 export const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<HTMLElement | null>(null);
   const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -47,14 +47,14 @@ export const NavBar = () => {
     setAnchorElNav(null);
   };
 
-  const handlePageClick = (pageUrl) => {
+  const handlePageClick = (pageUrl: string) => {
     navigate(pageUrl);
     handleCloseNavMenu();
   };
 
   return (
     <AppBar position="static" color="primary">
-      <Container maxWidth="xxl">
+      <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
             variant="h6"

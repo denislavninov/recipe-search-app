@@ -5,17 +5,20 @@ import { useNavigate } from "react-router-dom";
 import {
   fetchCategories,
   fetchRecipesByCategory,
-} from "../../modules/recipes/recipeService";
-import { RecipeDetails } from "../../modules/recipes/RecipeDetails";
+} from "./recipeService";
+import { RecipeDetails } from "./RecipeDetails";
+import { Category, CategoryEnum } from "./models/Category";
+import { Recipe } from "./models/recipe";
+
 
 export const Categories = () => {
   // Fetch categories from API and display them
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [recipeLoading, setRecipeLoading] = useState(false);
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,7 +27,7 @@ export const Categories = () => {
         const fetchedCategories = await fetchCategories();
         setCategories(fetchedCategories);
       } catch (err) {
-        setError(err.message);
+        setError((err as Error).message);
       } finally {
         setLoading(false);
       }
@@ -33,7 +36,7 @@ export const Categories = () => {
     getCategories();
   }, []);
 
-  const handleCategorySelect = async (categoryName) => {
+  const handleCategorySelect = async (categoryName: CategoryEnum) => {
     navigate(`/recipes/${categoryName}`);
     // Fetch recipes for the selected category
     try {
@@ -41,13 +44,13 @@ export const Categories = () => {
       const fetchedRecipes = await fetchRecipesByCategory(categoryName);
       setRecipes(fetchedRecipes);
     } catch (err) {
-      setError(err.message);
+      setError((err as Error).message);
     } finally {
       setRecipeLoading(false);
     }
   };
 
-  const handleRecipeSelect = (recipe) => {
+  const handleRecipeSelect = (recipe: Recipe) => {
     setSelectedRecipe(recipe);
   };
 
@@ -69,7 +72,7 @@ export const Categories = () => {
             {categories.map((category) => (
               <Grid item xs={12} sm={3} md={2} key={category.idCategory}>
                 <Card
-                  onClick={() => handleCategorySelect(category.strCategory)}
+                  onClick={() => handleCategorySelect(category.strCategory as CategoryEnum)}
                 >
                   <CardMedia
                     component="img"

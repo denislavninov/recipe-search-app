@@ -6,8 +6,10 @@ import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 import { useNavigate } from "react-router-dom";
+import { Recipe } from "../models/recipe";
 
-export const RecipeItem = ({ recipe }) => {
+
+export const RecipeItem = ({ recipe }: { recipe: Recipe }) => {
   const navigate = useNavigate();
 
   const handleRecipeClick = () => {

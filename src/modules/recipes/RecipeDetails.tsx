@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@mui/material";
 
-export const RecipeDetails = ({ selectedRecipe, onBack }) => {
+export const RecipeDetails = ({ selectedRecipe, onBack }: any) => {
   if (!selectedRecipe) {
     return null;
   }

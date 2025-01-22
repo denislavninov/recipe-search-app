@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import "./styles.css";
 import { useState } from "react";
 import { useRecipesDispatch } from "../RecipesProvider";
@@ -20,6 +20,9 @@ import {
 } from "@mui/material";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import { UnstyledSnackbarIntroduction } from "../../../shared-component/MuiSnackBar";
+import { Areas } from "../models/Area";
+import { NewRecipeFormData } from "../models/NewRecipeData";
+import { CategoryEnum } from "../models/Category";
 
 export const CreateNewRecipe = () => {
   const dispatch = useRecipesDispatch();
@@ -36,28 +39,41 @@ export const CreateNewRecipe = () => {
 
     formState: { errors },
   } = useForm({
-    strMeal: "",
-    strCategory: "",
-    ingredients: [{ ingredient: "", measure: "" }],
+    defaultValues: {
+      strMeal: "",
+      strCategory: "",
+      strArea: "",
+      strInstructions: "",
+      strDrinkAlternate: "",
+      strMealThumb: "",
+      strTags: "",
+      strYoutube: "",
+      ingredients: [{ ingredient: "", measure: "" }],
+    },
   });
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false); // Close Snackbar
   };
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<NewRecipeFormData> = (data) => {
+
+    if (!data.strMealThumb || !data.strInstructions) {
+      setSnackbarMessage("strMealThumb and strInstructions are required.");
+      setSnackbarOpen(true);
+      return; // Prevent submission if validation fails
+    }
     const formattedData = {
-      idMeal: Date.now(),
+      idMeal: Date.now().toString(),
       strMeal: data.strMeal,
       strCategory: data.strCategory,
       strDrinkAlternate: data.strDrinkAlternate || "",
       strArea: data.strArea || "",
       strInstructions: data.strInstructions,
       strMealThumb: data.strMealThumb || "",
-      strTags: data.strTags ? data.strTags.split(",") : [],
+      strTags: data.strTags ? data.strTags.split(',').join(",") : "",
       strYoutube: data.strYoutube || "",
-      ingredients: [data.strIngredients1 || ""],
-      ...data.ingredients
+      ingredients: data.ingredients
         .filter((pair) => pair.ingredient.trim() !== "")
         .reduce(
           (acc, pair, index) => ({
@@ -68,11 +84,11 @@ export const CreateNewRecipe = () => {
           {},
         ),
     };
-    dispatch({ type: RECIPE_ACTIONS.update, payload: [formattedData] }); // Use dispatch to add the recipe
+    dispatch({ type: RECIPE_ACTIONS.update, payload: [formattedData] });
     console.log("New recipe added", formattedData);
 
-    setSnackbarMessage("Recipe created successfully!"); // Set Snackbar message
-    setSnackbarOpen(true); // Open Snackbar
+    setSnackbarMessage("Recipe created successfully!");
+    setSnackbarOpen(true);
 
     reset();
   };
@@ -114,7 +130,6 @@ export const CreateNewRecipe = () => {
         <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             type="text"
-            name="strMeal"
             fullWidth
             placeholder="Enter the meal name"
             autoFocus
@@ -161,7 +176,7 @@ export const CreateNewRecipe = () => {
               <MenuItem value="">
                 <em>Select a category</em>
               </MenuItem>
-              {categories.map((category) => (
+              {Object.values(CategoryEnum).map((category) => (
                 <MenuItem key={category} value={category}>
                   {category}
                 </MenuItem>
@@ -187,7 +202,7 @@ export const CreateNewRecipe = () => {
               <MenuItem value="">
                 <em>Select an area</em>
               </MenuItem>
-              {areas.map((area) => (
+              {Object.values(Areas).map((area) => (
                 <MenuItem key={area} value={area}>
                   {area}
                 </MenuItem>
@@ -226,7 +241,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strDrinkAlternate"
             fullWidth
             placeholder="Enter the drink name"
             autoFocus
@@ -240,7 +254,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strMealThumb"
             fullWidth
             placeholder="https://www.example.com/image.jpg"
             sx={{ mb: 2 }}
@@ -277,7 +290,6 @@ export const CreateNewRecipe = () => {
 
           <TextField
             type="text"
-            name="strYoutube"
             fullWidth
             placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
             sx={{ mb: 2 }}
@@ -374,51 +386,4 @@ export const CreateNewRecipe = () => {
   );
 };
 
-const categories = [
-  "Beef",
-  "Chicken",
-  "Dessert",
-  "Lamb",
-  "Miscellaneous",
-  "Pasta",
-  "Pork",
-  "Seafood",
-  "Side",
-  "Starter",
-  "Vegan",
-  "Vegetarian",
-  "Breakfast",
-  "Goat",
-];
 
-const areas = [
-  "American",
-  "British",
-  "Canadian",
-  "Chinese",
-  "Croatian",
-  "Dutch",
-  "Egyptian",
-  "Filipino",
-  "French",
-  "Greek",
-  "Indian",
-  "Irish",
-  "Italian",
-  "Jamaican",
-  "Japanese",
-  "Kenyan",
-  "Malaysian",
-  "Mexican",
-  "Moroccan",
-  "Polish",
-  "Portuguese",
-  "Russian",
-  "Spanish",
-  "Thai",
-  "Tunisian",
-  "Turkish",
-  "Ukrainian",
-  "Unknown",
-  "Vietnamese",
-];

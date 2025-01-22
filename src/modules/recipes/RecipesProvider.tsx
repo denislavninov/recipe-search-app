@@ -1,14 +1,20 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, Dispatch } from "react";
+import { Recipe } from "./models/recipe";
 
 export const RECIPE_ACTIONS = {
   update: "update",
   deleteAll: "delete_all",
 };
 
-export const RecipesContext = createContext();
-export const RecipesDispatchContext = createContext();
+type Action = {
+  type: string;
+  payload?: Recipe[];
+};
 
-export const RecipesProvider = ({ children, initialState }) => {
+export const RecipesContext = createContext<Recipe[]>([]);
+export const RecipesDispatchContext = createContext<Dispatch<Action>>(() => { });
+
+export const RecipesProvider = ({ children, initialState }: { children: React.ReactNode; initialState: Recipe[] }) => {
   const [recipes, dispatch] = useReducer(userReducer, initialState ?? []);
 
   return (
@@ -20,14 +26,14 @@ export const RecipesProvider = ({ children, initialState }) => {
   );
 };
 
-function userReducer(state, action) {
+function userReducer(state: Recipe[], action: Action): Recipe[] {
   switch (action.type) {
     case RECIPE_ACTIONS.update: {
       console.log("Incoming action", action, state);
-      const newRecipes = action.payload.filter(
+      const newRecipes = action.payload?.filter(
         (payloadItem) =>
           !state.some((recipe) => recipe.idMeal === payloadItem.idMeal),
-      );
+      ) || [];
 
       return [...newRecipes, ...state];
     }

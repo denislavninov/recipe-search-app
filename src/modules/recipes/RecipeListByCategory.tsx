@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchRecipesByCategory } from "../recipes/recipeService"; // Create this function to fetch recipes by category
+import { fetchRecipesByCategory } from "./recipeService"; // Create this function to fetch recipes by category
+import { Recipe } from "./models/recipe"; // Import Recipe from models
 
 export const RecipeListByCategory = () => {
   const { category } = useParams(); // Get the category from the URL
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getRecipes = async () => {
       try {
-        const fetchedRecipes = await fetchRecipesByCategory(category); // Fetch recipes by category
-        setRecipes(fetchedRecipes);
+        if (typeof category === 'string') { // Type guard
+          const fetchedRecipes = await fetchRecipesByCategory(category);
+          setRecipes(fetchedRecipes);
+        } else {
+          setError("Category is not a valid string");
+        }
       } catch (err) {
-        setError(err.message);
+        setError((err as Error).message);
       } finally {
         setLoading(false);
       }
@@ -32,9 +37,8 @@ export const RecipeListByCategory = () => {
         <h2>Recipes in {category}</h2>
         {recipes.map((recipe) => (
           <li key={recipe.idMeal} className="recipe-item">
-            {/* {recipe.strMeal} */}
             <Link to={`/recipe/${recipe.strMeal}`}>{recipe.strMeal}</Link>
-          </li> // Display recipe names
+          </li>
         ))}
       </ul>
     </div>

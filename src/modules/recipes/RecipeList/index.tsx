@@ -14,9 +14,10 @@ import {
 } from "../RecipesProvider";
 import { fetchRecipesByIngredient, fetchRecipesById } from "../recipeService";
 import { RecipeList } from "../RecipeList";
+import { Recipe } from "../models/recipe";
 
 export const RecipeDetails = () => {
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const recipes = useRecipes();
   const dispatch = useRecipesDispatch();
 
@@ -26,7 +27,7 @@ export const RecipeDetails = () => {
     );
   }, [dispatch]);
 
-  const handleRecipeClick = (idMeal) => {
+  const handleRecipeClick = (idMeal: string) => {
     fetchRecipesById(idMeal)
       .then((recipeDetails) => {
         console.log("Fetched recipe details:", recipeDetails);
@@ -35,6 +36,19 @@ export const RecipeDetails = () => {
       })
       .catch((error) => console.error("Error fetching recipe details:", error));
   };
+
+  // Validate recipes before rendering
+  // const validateRecipes = (recipes: any[]): Recipe[] => {
+  //   return recipes.map((recipe) => ({
+  //     idMeal: recipe.idMeal || "",
+  //     strMeal: recipe.strMeal || "",
+  //     strMealThumb: recipe.strMealThumb || "default-image-url", // Provide a default image if missing
+  //     strInstructions: recipe.strInstructions || "No instructions available.",
+  //     ...recipe,
+  //   }));
+  // };
+
+  // const validatedRecipes = validateRecipes(recipes);
 
   return (
     <>
@@ -86,3 +100,4 @@ export const RecipeDetails = () => {
     </>
   );
 };
+
