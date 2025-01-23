@@ -31,7 +31,7 @@ export const RecipeDetails = () => {
         height="300"
         image={selectedRecipe.strMealThumb}
         alt={selectedRecipe.strMeal}
-        sx={{ borderRadius: 2 }} // Rounded corners for the image
+        sx={{ borderRadius: 2 }}
       />
       <CardContent>
         <Typography variant="h4" component="h1" gutterBottom>

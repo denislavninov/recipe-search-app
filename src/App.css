@@ -1,10 +1,3 @@
-/* .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: "Roboto", sans-serif;
-  background-color: #f9f9f9;
-} */
 
 .search-bar {
   display: flex;
@@ -139,18 +132,6 @@ label {
   font-weight: bold;
 }
 
-/* input, textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-} */
-
-/* input:focus, textarea:focus {
-  border-color: #FF6347;
-  outline: none;
-} */
 .create-input, .create-textarea {
   width: 100%;
   padding: 10px;
@@ -163,7 +144,6 @@ label {
   border-color: #FF6347;
   outline: none;
 }
-
 
 
 .submit-button {
@@ -185,7 +165,7 @@ label {
   flex-wrap: wrap; 
   list-style-type: none; 
   padding: 0; 
-  justify-content: center; /* Center the categories */
+  justify-content: center; 
 }
 
 h2 {
@@ -195,14 +175,14 @@ h2 {
 .category-item {
   margin: 10px; 
   text-align: center; 
-  width: 150px; /* Set a fixed width for category items */
+  width: 150px; 
 }
 
 .category-item img {
-  max-width: 100%; /* Ensure images fit within the category item */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 100%;
+  height: auto; 
   border-radius: 5px;
-  max-height: 100px; /* Set a maximum height for images */
+  max-height: 100px; 
 }
 
 .category-item h3 {
@@ -217,7 +197,6 @@ h2 {
   outline: none; 
 }
 
-/* login , register pages */
 
 
 

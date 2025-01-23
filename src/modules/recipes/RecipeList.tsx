@@ -15,7 +15,7 @@ export const RecipeList = () => {
   useEffect(() => {
     if (recipes.length === 0) {
       fetchRecipesByIngredient("chicken").then((recipes) => {
-        dispatch({type: RECIPE_ACTIONS.update, payload: recipes});
+        dispatch({ type: RECIPE_ACTIONS.update, payload: recipes });
       });
     }
   }, [recipes.length, dispatch])
@@ -45,10 +45,10 @@ export const RecipeList = () => {
               style={{ borderRadius: "2px", transition: "transform 0.4s" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.transform = "scale(1.05)")
-              } // Hover effect
+              }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.transform = "scale(1)")
-              } // Reset on leave
+              }
             />
             <ImageListItemBar
               title={recipe.strMeal}

@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Ensure React is imported
+import React, { useState } from "react";
 import { useUserDispatch } from "./UserContext";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../../utils";
@@ -25,19 +25,19 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 
 export const Register = () => {
-  const dispatch = useUserDispatch(); // Use the useUser hook to get dispatch
+  const dispatch = useUserDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     gender: "",
-  }); // State for form data
+  });
   const [error, setError] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value })); // Update state on input change
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
     setError("");
   };
 
@@ -58,8 +58,8 @@ export const Register = () => {
       return;
     }
 
-    dispatch({ type: "REGISTER_USER", payload: formData }); // Dispatch action with form data
-    console.log("Kullanıcı Bilgileri:", formData); // Log form data
+    dispatch({ type: "REGISTER_USER", payload: formData });
+    console.log("User Information:", formData);
     navigate("/recipes/new");
   };
 
@@ -67,7 +67,7 @@ export const Register = () => {
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => {
-      console.log("Show Password:", !show); // Durumu konsola yazdır
+      console.log("Show Password:", !show);
       return !show;
     });
   };
@@ -109,8 +109,8 @@ export const Register = () => {
             type="text"
             name="name"
             placeholder="Username"
-            value={formData.name} // Bind input value to state
-            onChange={handleChange} // Handle input change
+            value={formData.name}
+            onChange={handleChange}
             fullWidth
             autoFocus
             sx={{ mb: 2 }}
@@ -125,8 +125,8 @@ export const Register = () => {
             type="email"
             name="email"
             placeholder="demail@gmail.com"
-            value={formData.email} // Bind input value to state
-            onChange={handleChange} // Handle input change
+            value={formData.email}
+            onChange={handleChange}
             fullWidth
             autoFocus
             sx={{ mb: 2 }}

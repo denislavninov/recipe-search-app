@@ -24,16 +24,16 @@ const Logout = () => {
       sx={{
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh", // Center vertically
-        backgroundColor: "#f5f5f5", // Light background color
+        height: "100vh",
+        backgroundColor: "#f5f5f5",
       }}
     >
       <Typography
-        variant="h6" // Use a variant for styling
-        color="primary" // Change color to primary theme color
+        variant="h6"
+        color="primary"
         sx={{
-          marginBottom: 2, // Add some margin below the message
-          fontWeight: "bold", // Make the text bold
+          marginBottom: 2,
+          fontWeight: "bold",
         }}
       >
         {message}

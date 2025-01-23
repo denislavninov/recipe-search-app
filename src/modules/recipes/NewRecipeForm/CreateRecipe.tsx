@@ -26,9 +26,9 @@ import { CategoryEnum } from "../models/Category";
 
 export const CreateNewRecipe = () => {
   const dispatch = useRecipesDispatch();
-  const [pairCount, setPairCount] = useState(1); // Initialize pairCount state
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // State for Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState(""); // State for Snackbar message
+  const [pairCount, setPairCount] = useState(1);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const {
     register,
@@ -61,7 +61,7 @@ export const CreateNewRecipe = () => {
     if (!data.strMealThumb || !data.strInstructions) {
       setSnackbarMessage("strMealThumb and strInstructions are required.");
       setSnackbarOpen(true);
-      return; // Prevent submission if validation fails
+      return;
     }
     const formattedData = {
       idMeal: Date.now().toString(),

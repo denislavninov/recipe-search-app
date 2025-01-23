@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { SearchBar } from "./modules/recipes/search-bar";
+import { SearchBar } from "./modules/recipes/SearchBar";
 import { CreateNewRecipe } from "./modules/recipes/NewRecipeForm/CreateRecipe";
 import { Login } from "./modules/user/Login";
 import { Register } from "./modules/user/Register";
@@ -10,7 +10,7 @@ import { RecipeList } from "./modules/recipes/RecipeList";
 import { RecipeDetails } from "./modules/recipes/RecipeDetails";
 
 export const AppRouter = () => {
-  
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

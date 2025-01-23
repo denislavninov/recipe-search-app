@@ -13,16 +13,16 @@ export const RecipeListByCategory = () => {
     if (categoryId) {
       const getRecipes = async () => {
         try {
-            const fetchedRecipes = await fetchRecipesByCategory(categoryId);
-            setRecipes(fetchedRecipes);
-  
+          const fetchedRecipes = await fetchRecipesByCategory(categoryId);
+          setRecipes(fetchedRecipes);
+
         } catch (err) {
           setError((err as Error).message);
         } finally {
           setLoading(false);
         }
       };
-  
+
       getRecipes();
     }
   }, [categoryId]);

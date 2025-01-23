@@ -14,7 +14,7 @@ input, select, textarea {
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
-  transition: border-color 0.3s, box-shadow 0.3s; /* Geçiş efekti */
+  transition: border-color 0.3s, box-shadow 0.3s; 
 }
 
 input::placeholder, textarea::placeholder {
@@ -23,15 +23,15 @@ input::placeholder, textarea::placeholder {
 }
 
 input:focus, select:focus, textarea:focus {
-  border-color: #FF6347; /* Odaklandığında kenar rengi */
-  box-shadow: 0 0 5px rgba(255, 99, 71, 0.5); /* Hafif gölge */
+  border-color: #FF6347;
+  box-shadow: 0 0 5px rgba(255, 99, 71, 0.5); 
 }
 
 h2 {
-  font-size: 2rem; /* Daha büyük başlık boyutu */
-  color: #FF6347; /* Başlık rengi */
+  font-size: 2rem; 
+  color: #FF6347; 
   text-align: center;
-  margin-bottom: 20px; /* Alt boşluk */
+  margin-bottom: 20px; 
 }
 /* styles.css */
 .error-message {
@@ -48,7 +48,7 @@ h2 {
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s, transform 0.2s; /* Geçiş efekti */
+  transition: background-color 0.3s, transform 0.2s;
   font-weight: 600;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 4px rgba(255, 99, 71, 0.2);
@@ -57,7 +57,7 @@ h2 {
 
 .submit-button:hover {
   background-color: #e5533d;
-  transform: scale(1.05); /* Hover durumunda büyütme */
+  transform: scale(1.05);
 }
 
 .submit-button:active {
