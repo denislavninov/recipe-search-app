@@ -27,10 +27,6 @@ export interface Recipe {
   strIngredient18?: string;
   strIngredient19?: string;
   strIngredient20?: string;
-  strSource?: string;
-  strCreativeCommonsConfirmed?: string;
-  dateModified?: string;
-  [key: string]: any;
   strMeasure1?: string;
   strMeasure2?: string;
   strMeasure3?: string;
@@ -51,4 +47,7 @@ export interface Recipe {
   strMeasure18?: string;
   strMeasure19?: string;
   strMeasure20?: string;
+  strSource?: string;
+  strCreativeCommonsConfirmed?: string;
+  dateModified?: string;
 }
