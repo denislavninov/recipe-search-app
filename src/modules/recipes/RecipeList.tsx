@@ -2,26 +2,26 @@ import { Box } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import { Recipe } from "./models/recipe";
+import { RECIPE_ACTIONS, useRecipes, useRecipesDispatch } from "./RecipesProvider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { fetchRecipesByIngredient } from "./recipeService";
 
-export interface RecipeListProps {
-  recipes: Recipe[];
-  onRecipeClick: (recipeId: string) => void;
-}
+export const RecipeList = () => {
+  const recipes = useRecipes();
+  const dispatch = useRecipesDispatch();
+  const navigate = useNavigate();
 
-export const RecipeList = ({ recipes, onRecipeClick }: RecipeListProps) => {
-  console.log("Recipes:", recipes); // Debug: Check if recipes are being passed correctly
-  console.log("onRecipeClick:", onRecipeClick); // Debug: Check if onRecipeClick is a function
-
-  const handleClick = (recipeId: string | undefined) => {
-    console.log("Clicked recipe:", recipeId); // Debug: Check if click is registered
-    if (recipeId && typeof onRecipeClick === "function") {
-      onRecipeClick(recipeId);
-    } else if (!recipeId) {
-      console.error("Recipe ID is undefined");
-    } else {
-      console.error("onRecipeClick is not a function");
+  useEffect(() => {
+    if (recipes.length === 0) {
+      fetchRecipesByIngredient("chicken").then((recipes) => {
+        dispatch({type: RECIPE_ACTIONS.update, payload: recipes});
+      });
     }
+  }, [recipes.length, dispatch])
+
+  const handleClick = (recipeId: string) => {
+    navigate(`/recipes/${recipeId}`);
   };
 
   return Array.isArray(recipes) && recipes.length > 0 ? (
@@ -37,12 +37,11 @@ export const RecipeList = ({ recipes, onRecipeClick }: RecipeListProps) => {
     >
       <ImageList variant="masonry" cols={3} gap={12} sx={{ m: 1 }}>
         {recipes.map((recipe) => (
-          <ImageListItem key={recipe.idMeal} sx={{ m: 2 }}>
+          <ImageListItem key={recipe.idMeal} sx={{ m: 2 }} onClick={() => handleClick(recipe.idMeal)}>
             <img
               src={`${recipe.strMealThumb}`}
               alt={recipe.strMeal}
               loading="lazy"
-              onClick={() => handleClick(recipe.idMeal)}
               style={{ borderRadius: "2px", transition: "transform 0.4s" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.transform = "scale(1.05)")

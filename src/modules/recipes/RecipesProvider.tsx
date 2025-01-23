@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext, Dispatch } from "react";
-import { Recipe } from "./models/recipe";
+import { Recipe } from "./models/Recipe";
 
 export const RECIPE_ACTIONS = {
   update: "update",

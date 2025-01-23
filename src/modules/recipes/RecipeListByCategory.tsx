@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchRecipesByCategory } from "./recipeService"; // Create this function to fetch recipes by category
-import { Recipe } from "./models/recipe"; // Import Recipe from models
+import { fetchRecipesByCategory } from "./recipeService";
+import { Recipe } from "./models/Recipe";
 
 export const RecipeListByCategory = () => {
-  const { category } = useParams(); // Get the category from the URL
+  const { categoryId } = useParams<{ categoryId: string }>();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const getRecipes = async () => {
-      try {
-        if (typeof category === 'string') { // Type guard
-          const fetchedRecipes = await fetchRecipesByCategory(category);
-          setRecipes(fetchedRecipes);
-        } else {
-          setError("Category is not a valid string");
+    if (categoryId) {
+      const getRecipes = async () => {
+        try {
+            const fetchedRecipes = await fetchRecipesByCategory(categoryId);
+            setRecipes(fetchedRecipes);
+  
+        } catch (err) {
+          setError((err as Error).message);
+        } finally {
+          setLoading(false);
         }
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getRecipes();
-  }, [category]);
+      };
+  
+      getRecipes();
+    }
+  }, [categoryId]);
 
   if (loading) return <h2>Loading Recipes...</h2>;
   if (error) return <h2>Error: {error}</h2>;
@@ -34,10 +33,10 @@ export const RecipeListByCategory = () => {
   return (
     <div className="recipe-list">
       <ul>
-        <h2>Recipes in {category}</h2>
+        <h2>Recipes in the category "{categoryId}"</h2>
         {recipes.map((recipe) => (
           <li key={recipe.idMeal} className="recipe-item">
-            <Link to={`/recipe/${recipe.strMeal}`}>{recipe.strMeal}</Link>
+            <Link to={`/recipes/${recipe.idMeal}`}>{recipe.strMeal}</Link>
           </li>
         ))}
       </ul>
