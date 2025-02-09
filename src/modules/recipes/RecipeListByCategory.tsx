@@ -35,7 +35,7 @@ export const RecipeListByCategory = () => {
       <ul>
         <h2>Recipes in the category "{categoryId}"</h2>
         {recipes.map((recipe) => (
-          <li key={recipe.idMeal} className="recipe-item">
+          <li key={recipe.idMeal} className="recipe-item" data-testid={`recipe-${recipe.idMeal}`}>
             <Link to={`/recipes/${recipe.idMeal}`}>{recipe.strMeal}</Link>
           </li>
         ))}

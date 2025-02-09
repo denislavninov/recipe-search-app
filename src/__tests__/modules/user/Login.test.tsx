@@ -70,4 +70,28 @@ describe("<Login /> component", () => {
 
     expect(screen.getByText(/password must be at least 4 characters/i)).toBeInTheDocument();
   });
+  it("should show a correct error message for empty usename or password", () => {
+    renderWithContext();
+
+    fireEvent.click(screen.getByRole("button", { name: /log in/i }));
+
+    expect(screen.getByText(/username and password are required/i)).toBeInTheDocument();
+  });
+
+  it("should toggle the 'Remember me' checkbox", () => {
+    renderWithContext();
+
+    const rememberMeCheckbox = screen.getByLabelText(/remember me/i);
+
+    // Initially, the checkbox should not be checked
+    expect(rememberMeCheckbox).not.toBeChecked();
+
+    // Click to check the checkbox
+    fireEvent.click(rememberMeCheckbox);
+    expect(rememberMeCheckbox).toBeChecked();
+
+    // Click again to uncheck the checkbox
+    fireEvent.click(rememberMeCheckbox);
+    expect(rememberMeCheckbox).not.toBeChecked();
+  });
 });

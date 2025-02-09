@@ -2,7 +2,7 @@ import { RecipeList } from "../../../modules/recipes/RecipeList";
 import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import * as RecipesProvider from "../../../modules/recipes/RecipesProvider"; // Import the entire module
-
+import * as recipeService from "../../../modules/recipes/recipeService";
 const mockRecipes = [
   { idMeal: '1', strMeal: 'Chicken Curry', strMealThumb: 'http://example.com/chicken-curry.jpg', strInstructions: 'Chicken Curry Instructions' },
   { idMeal: '2', strMeal: 'Beef Stew', strMealThumb: 'http://example.com/beef-stew.jpg', strInstructions: 'Beef Stew Instructions' },
@@ -36,8 +36,15 @@ describe("<RecipeList /> component", () => {
     expect(screen.getByText(/Chicken Curry/i)).toBeInTheDocument();
     expect(screen.getByText(/Beef Stew/i)).toBeInTheDocument();
   });
+
+  it("should make an API request if there are no recipes", () => {
+    jest.spyOn(RecipesProvider, 'useRecipes').mockReturnValue([]); // Mock the hook to simulate no recipes
+    jest.spyOn(recipeService, 'fetchRecipesByIngredient').mockResolvedValue([]);
+    renderRecipeList();
+
+    expect(recipeService.fetchRecipesByIngredient).toHaveBeenCalledWith("chicken");
+  });
+
+
+
 });
-
-
-
-
