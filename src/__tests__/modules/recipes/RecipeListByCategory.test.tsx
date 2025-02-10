@@ -1,39 +1,60 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { RecipeListByCategory } from "../../../modules/recipes/RecipeListByCategory";
+import { fetchRecipesByCategory } from "../../../modules/recipes/recipeService";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { ReactNode } from "react";
 
-global.fetch = jest.fn();
+jest.mock("../../../modules/recipes/recipeService", () => ({
+  fetchRecipesByCategory: jest.fn(),
+}));
 
-describe("<RecipeListByCategory, component/>", () => {
+const renderWithRouter = (children: ReactNode) => {
+  render(
+    <MemoryRouter initialEntries={["/recipes/categories/test-category"]}>
+      <Routes>
+        <Route path="/recipes/categories/:categoryId" element={children}/>
+      </Routes>
+    </MemoryRouter>,
+  );
+};
+
+describe("<RecipeListByCategory />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("should display loading message initially", () => {
-    render(<RecipeListByCategory />);
+    renderWithRouter(<RecipeListByCategory />);
     expect(screen.getByText(/Loading Recipes.../i)).toBeInTheDocument();
   });
 
   it("should display recipe list when data is loaded", async () => {
-    (fetch as jest.Mock).mockResolvedValue({
-      json: async () => ({ recipes: [] }),
-    });
+    (fetchRecipesByCategory as jest.Mock).mockResolvedValue([]);
 
-    render(<RecipeListByCategory />);
-    expect(await screen.queryByText(/No recipes found/i)).toBeNull();
+    renderWithRouter(<RecipeListByCategory />);
+    expect(screen.queryByText(/No recipes found/i)).toBeNull();
   });
 
   it("should display error message when fetch fails", async () => {
-    (fetch as jest.Mock).mockRejectedValue(new Error("Error: "));
+    (fetchRecipesByCategory as jest.Mock).mockRejectedValueOnce(
+      new Error("An error occured when fetching data from"),
+    );
 
-    render(<RecipeListByCategory />);
-    expect(await screen.findByText(/Error: /i)).toBeInTheDocument();
+    renderWithRouter(<RecipeListByCategory />);
+
+    expect(await screen.findByText(/An error occured when fetching data from/i)).toBeInTheDocument();
   });
 
   it("should display error message when fetch fails with specific message", async () => {
-    (fetch as jest.Mock).mockRejectedValue(new Error("Network Error"));
+    (fetchRecipesByCategory as jest.Mock).mockRejectedValueOnce(
+      new Error("Network Error"),
+    );
 
-    render(<RecipeListByCategory />);
-    expect(await screen.findByText(/Error: Network Error/i)).toBeInTheDocument();
+    renderWithRouter(<RecipeListByCategory />);
+
+    expect(
+      await screen.findByText(/Error: Network Error/i),
+    ).toBeInTheDocument();
   });
 
   it("should display a list of recipes when data is successfully fetched", async () => {
@@ -43,13 +64,14 @@ describe("<RecipeListByCategory, component/>", () => {
       { idMeal: "3", strMeal: "Recipe Three" },
     ];
 
-    (fetch as jest.Mock).mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce({ meals: mockRecipes }),
-    });
+    (fetchRecipesByCategory as jest.Mock).mockResolvedValueOnce(mockRecipes);
 
-    render(<RecipeListByCategory />);
+    renderWithRouter(<RecipeListByCategory />);
 
-    // Wait for the recipes to appear using getByTestId
+    await waitFor(() =>
+      expect(fetchRecipesByCategory).toHaveBeenCalledTimes(1),
+    );
+
     expect(await screen.findByTestId("recipe-1")).toBeInTheDocument();
     expect(await screen.findByTestId("recipe-2")).toBeInTheDocument();
     expect(await screen.findByTestId("recipe-3")).toBeInTheDocument();

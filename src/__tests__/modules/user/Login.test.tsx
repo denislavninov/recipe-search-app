@@ -53,7 +53,7 @@ describe("<Login /> component", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /log in/i }));
 
-    expect(screen.getByText(/invalid email format/i)).toBeInTheDocument();
+    expect(screen.getByText(/enter a valid email address./i)).toBeInTheDocument();
   });
 
   it("should show error message for short password", () => {

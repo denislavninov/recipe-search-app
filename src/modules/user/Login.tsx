@@ -38,26 +38,30 @@ export const Login = () => {
   }, [user, navigate]);
 
   const handleLogin = () => {
-    let hasError = false;
-
+    let error = false;
+    
     if (!username || !password) {
       setError("Username and password are required.");
-      hasError = true;
-    } else if (!validateEmail(username)) {
-      setUsernameError("Invalid email format");
-      hasError = true;
-    } else {
-      setUsernameError("");
+      setUsernameError("Email is empty.");
+      error = true;
+    } 
+    if (!validateEmail(username)) {
+      setUsernameError("Please enter a valid email address.");
+      error = true;
     }
+
     if (password.length < 4) {
       setPasswordError("Password must be at least 4 characters.");
-      hasError = true;
-    } else {
-      setPasswordError("");
+      error = true;
     }
-    if (hasError) return;
 
-    dispatch({ type: "LOGIN", payload: { email: username, name: "Default Name" } });
+    if (error) return;
+
+
+    dispatch({
+      type: "LOGIN",
+      payload: { email: username, name: "Default Name" },
+    });
     console.log("User logged in:", { username, password });
 
     navigate("/");
@@ -67,11 +71,11 @@ export const Login = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (event: { preventDefault: () => void; }) => {
+  const handleMouseDownPassword = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
 
-  const handleMouseUpPassword = (event: { preventDefault: () => void; }) => {
+  const handleMouseUpPassword = (event: { preventDefault: () => void }) => {
     event.preventDefault();
   };
 
@@ -104,7 +108,17 @@ export const Login = () => {
         >
           Log In
         </Typography>
-
+        {error && (
+          <Typography
+            component={"p"}
+            color="error"
+            variant="body2"
+            align="center"
+            sx={{ m: "2rem auto" }}
+          >
+            {error}
+          </Typography>
+        )}
         <Box
           component="form"
           sx={{ mt: 1 }}
@@ -112,6 +126,7 @@ export const Login = () => {
             e.preventDefault();
             handleLogin();
           }}
+          noValidate
         >
           <TextField
             placeholder="Username"
