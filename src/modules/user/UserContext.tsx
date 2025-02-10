@@ -16,7 +16,7 @@ type UserAction = {
   payload?: User;
 };
 
-const UserContext = createContext<UserState | undefined>(undefined);
+export const UserContext = createContext<UserState | undefined>(undefined);
 export const UserDispatchContext = createContext<Dispatch<UserAction> | undefined>(undefined);
 
 const initialState: UserState = {
